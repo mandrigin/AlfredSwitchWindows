@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		744970C41E5397C60088C63C /* WindowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C31E5397C60088C63C /* WindowList.swift */; };
+		744970C61E5397F30088C63C /* Alfred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C51E5397F30088C63C /* Alfred.swift */; };
+		744970C81E53981F0088C63C /* WindowInfo+AlfredItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C71E53981F0088C63C /* WindowInfo+AlfredItem.swift */; };
+		744970CA1E5398C30088C63C /* CommandLine+EnumWindows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C91E5398C30088C63C /* CommandLine+EnumWindows.swift */; };
+		744970CC1E5398E90088C63C /* Array+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970CB1E5398E90088C63C /* Array+Search.swift */; };
 		74BA9E3E1E53270300C78C58 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BA9E3D1E53270300C78C58 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +28,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		744970C31E5397C60088C63C /* WindowList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowList.swift; sourceTree = "<group>"; };
+		744970C51E5397F30088C63C /* Alfred.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alfred.swift; sourceTree = "<group>"; };
+		744970C71E53981F0088C63C /* WindowInfo+AlfredItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WindowInfo+AlfredItem.swift"; sourceTree = "<group>"; };
+		744970C91E5398C30088C63C /* CommandLine+EnumWindows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CommandLine+EnumWindows.swift"; sourceTree = "<group>"; };
+		744970CB1E5398E90088C63C /* Array+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Search.swift"; sourceTree = "<group>"; };
 		74BA9E3A1E53270300C78C58 /* EnumWindows */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EnumWindows; sourceTree = BUILT_PRODUCTS_DIR; };
 		74BA9E3D1E53270300C78C58 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +68,11 @@
 			isa = PBXGroup;
 			children = (
 				74BA9E3D1E53270300C78C58 /* main.swift */,
+				744970C51E5397F30088C63C /* Alfred.swift */,
+				744970CB1E5398E90088C63C /* Array+Search.swift */,
+				744970C91E5398C30088C63C /* CommandLine+EnumWindows.swift */,
+				744970C31E5397C60088C63C /* WindowList.swift */,
+				744970C71E53981F0088C63C /* WindowInfo+AlfredItem.swift */,
 			);
 			path = EnumWindows;
 			sourceTree = "<group>";
@@ -120,7 +135,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				744970CA1E5398C30088C63C /* CommandLine+EnumWindows.swift in Sources */,
+				744970CC1E5398E90088C63C /* Array+Search.swift in Sources */,
+				744970C61E5397F30088C63C /* Alfred.swift in Sources */,
 				74BA9E3E1E53270300C78C58 /* main.swift in Sources */,
+				744970C81E53981F0088C63C /* WindowInfo+AlfredItem.swift in Sources */,
+				744970C41E5397C60088C63C /* WindowList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +270,7 @@
 				74BA9E431E53270300C78C58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

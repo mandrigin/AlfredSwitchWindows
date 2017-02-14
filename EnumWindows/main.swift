@@ -1,12 +1,5 @@
-//
-//  main.swift
-//  EnumWindows
-//
-//  Created by Igor Mandrigin on 2017-02-14.
-//  Copyright © 2017 Igor Mandrigin. All rights reserved.
-//
-
 import Foundation
 
-print("Hello, World!")
+let foundWindows = WindowList.windows.search(query: CommandLine.searchQuery())
 
+print(AlfredDocument(withItems: foundWindows).xml.xmlString)
