@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		744970C41E5397C60088C63C /* WindowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C31E5397C60088C63C /* WindowList.swift */; };
+		744970C41E5397C60088C63C /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C31E5397C60088C63C /* Windows.swift */; };
 		744970C61E5397F30088C63C /* Alfred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C51E5397F30088C63C /* Alfred.swift */; };
 		744970C81E53981F0088C63C /* WindowInfo+AlfredItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C71E53981F0088C63C /* WindowInfo+AlfredItem.swift */; };
 		744970CA1E5398C30088C63C /* CommandLine+EnumWindows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C91E5398C30088C63C /* CommandLine+EnumWindows.swift */; };
@@ -28,7 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		744970C31E5397C60088C63C /* WindowList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowList.swift; sourceTree = "<group>"; };
+		744970C31E5397C60088C63C /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
 		744970C51E5397F30088C63C /* Alfred.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alfred.swift; sourceTree = "<group>"; };
 		744970C71E53981F0088C63C /* WindowInfo+AlfredItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WindowInfo+AlfredItem.swift"; sourceTree = "<group>"; };
 		744970C91E5398C30088C63C /* CommandLine+EnumWindows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CommandLine+EnumWindows.swift"; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 				744970C51E5397F30088C63C /* Alfred.swift */,
 				744970CB1E5398E90088C63C /* Array+Search.swift */,
 				744970C91E5398C30088C63C /* CommandLine+EnumWindows.swift */,
-				744970C31E5397C60088C63C /* WindowList.swift */,
+				744970C31E5397C60088C63C /* Windows.swift */,
 				744970C71E53981F0088C63C /* WindowInfo+AlfredItem.swift */,
 			);
 			path = EnumWindows;
@@ -140,7 +140,7 @@
 				744970C61E5397F30088C63C /* Alfred.swift in Sources */,
 				74BA9E3E1E53270300C78C58 /* main.swift in Sources */,
 				744970C81E53981F0088C63C /* WindowInfo+AlfredItem.swift in Sources */,
-				744970C41E5397C60088C63C /* WindowList.swift in Sources */,
+				744970C41E5397C60088C63C /* Windows.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
