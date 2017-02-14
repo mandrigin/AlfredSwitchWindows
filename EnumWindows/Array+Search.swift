@@ -14,7 +14,7 @@ extension Array where Element:WindowInfo {
             return self
         }
         
-        let result = self.filter{
+        let result = self.filter {
             let nameHit = $0.name.localizedCaseInsensitiveContains(q)
             let processHit = $0.processName.caseInsensitiveCompare(q) == ComparisonResult.orderedSame
             return nameHit || processHit

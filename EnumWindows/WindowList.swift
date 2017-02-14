@@ -1,7 +1,6 @@
 import Foundation
 
 class WindowInfo : Hashable {
-    
     private let windowInfoDict : Dictionary<NSObject, AnyObject>;
     
     init(rawDict : UnsafeRawPointer) {
@@ -43,9 +42,8 @@ class WindowInfo : Hashable {
     
 }
 
-struct WindowList {
-    
-    static var windows : [WindowInfo] {
+struct Windows {
+    static var all : [WindowInfo] {
         get {
             guard let wl = CGWindowListCopyWindowInfo(CGWindowListOption.optionOnScreenOnly, kCGNullWindowID) else {
                 return []
