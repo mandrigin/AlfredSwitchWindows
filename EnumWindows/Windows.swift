@@ -9,25 +9,31 @@ class WindowInfo : Hashable {
     
     var name : String {
         get {
-            return self.dictItem(key: "kCGWindowName")
+            return self.dictItem(key: "kCGWindowName", defaultValue: "")
         }
     }
     
     var processName : String {
         get {
-            return self.dictItem(key: "kCGWindowOwnerName")
+            return self.dictItem(key: "kCGWindowOwnerName", defaultValue: "")
         }
     }
     
     var appName : String {
         get {
-            return self.dictItem(key: "kCGWindowOwnerName")
+            return self.dictItem(key: "kCGWindowOwnerName", defaultValue: "")
         }
     }
     
-    func dictItem(key : String) -> String {
-        guard let value = windowInfoDict[key as NSObject] as? String else {
-            return ""
+    var pid : Int {
+        get {
+            return self.dictItem(key: "kCGWindowOwnerPID", defaultValue: -1)
+        }
+    }
+    
+    func dictItem<T>(key : String, defaultValue : T) -> T {
+        guard let value = windowInfoDict[key as NSObject] as? T else {
+            return defaultValue
         }
         return value
     }
