@@ -51,7 +51,7 @@ class WindowInfo : Hashable {
 struct Windows {
     static var all : [WindowInfo] {
         get {
-            guard let wl = CGWindowListCopyWindowInfo(CGWindowListOption.optionOnScreenOnly, kCGNullWindowID) else {
+            guard let wl = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) else {
                 return []
             }
             
