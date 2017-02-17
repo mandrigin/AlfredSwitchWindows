@@ -1,6 +1,38 @@
 import Foundation
 
-class WindowInfo : Hashable {
+class WindowInfo : Equatable {
+    
+    private let data : WindowInfoProtocol
+    
+    init(data: WindowInfoProtocol) {
+        self.data = data
+    }
+    
+    var name : String { return data.name }
+    var processName : String { return data.processName }
+    var pid : Int { return data.pid }
+    
+    static func == (lhs: WindowInfo, rhs: WindowInfo) -> Bool {
+        return lhs.processName == rhs.processName && lhs.name == rhs.name
+    }
+    
+    var hashValue: Int {
+        return "\(self.processName)-\(self.name)".hashValue
+    }
+    
+    var searchStrings: [String] {
+        return data.searchStrings
+    }
+}
+
+protocol WindowInfoProtocol {
+    var name : String { get }
+    var processName : String { get }
+    var pid : Int { get }
+    var searchStrings : [String] { get }
+}
+
+class WindowInfoDict : WindowInfoProtocol {
     private let windowInfoDict : Dictionary<NSObject, AnyObject>;
     
     init(rawDict : UnsafeRawPointer) {
@@ -31,25 +63,22 @@ class WindowInfo : Hashable {
         }
     }
     
+    var searchStrings: [String] {
+        return [self.processName, self.name]
+    }
+    
+    
     func dictItem<T>(key : String, defaultValue : T) -> T {
         guard let value = windowInfoDict[key as NSObject] as? T else {
             return defaultValue
         }
         return value
     }
-    
-    var hashValue: Int {
-        return "\(self.processName)-\(self.name)".hashValue
-    }
-    
-    static func == (lhs: WindowInfo, rhs: WindowInfo) -> Bool {
-        return lhs.processName == rhs.processName && lhs.name == rhs.name
-    }
-    
+
 }
 
 struct Windows {
-    static var all : [WindowInfo] {
+    static var activeWindows : [WindowInfo] {
         get {
             guard let wl = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) else {
                 return []
@@ -60,15 +89,44 @@ struct Windows {
                     return []
                 }
                 
-                let wi = WindowInfo(rawDict: windowInfoRef)
+                let wi = WindowInfoDict(rawDict: windowInfoRef)
                 
                 guard wi.name.characters.count > 0 else {
                     return []
                 }
                 
-                return [wi]
+                return [WindowInfo(data:wi)]
             }
         }
+    }
+    static var all : [WindowInfo] {
+        return activeWindows + safariTabs
+    }
+    
+    static var safariTabs : [WindowInfo] {
+        guard let safari =  SafariApplication.create() else {
+            return []
+        }
+        
+        return safari.windows.flatMap { return $0.tabs }.map { WindowInfo(data: $0) }
+    }
+}
+
+extension SafariTab : WindowInfoProtocol {
+    internal var pid: Int {
+        return -1 // TODO: Implement
+    }
+
+    internal var processName: String {
+        return "Safari"
+    }
+
+    internal var name: String {
+        return self.title
+    }
+
+    var searchStrings: [String] {
+        return [self.processName, self.title, self.url]
     }
 }
 

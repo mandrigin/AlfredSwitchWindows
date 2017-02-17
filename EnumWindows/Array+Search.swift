@@ -9,15 +9,14 @@ extension Array where Element:WindowInfo {
         return search(components: components)
     }
     
-    func search(components: ArraySlice<String>) -> [WindowInfo] {
+    private func search(components: ArraySlice<String>) -> [WindowInfo] {
         guard let q = components.first else {
             return self
         }
         
         let result = self.filter {
-            let nameHit = $0.name.localizedCaseInsensitiveContains(q)
-            let processHit = $0.processName.caseInsensitiveCompare(q) == ComparisonResult.orderedSame
-            return nameHit || processHit
+            let hits = $0.searchStrings.filter { $0.localizedCaseInsensitiveContains(q) }
+            return hits.count > 0
         }
         
         return result.search(components: components.dropFirst(1))

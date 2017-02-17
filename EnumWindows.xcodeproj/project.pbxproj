@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74466BA51E5760FB0032382F /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74466BA41E5760FB0032382F /* ScriptingBridge.framework */; };
+		74466BA71E5761F90032382F /* SafariApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74466BA61E5761F90032382F /* SafariApplication.swift */; };
 		744970C41E5397C60088C63C /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C31E5397C60088C63C /* Windows.swift */; };
 		744970C61E5397F30088C63C /* Alfred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C51E5397F30088C63C /* Alfred.swift */; };
 		744970C81E53981F0088C63C /* WindowInfo+AlfredItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C71E53981F0088C63C /* WindowInfo+AlfredItem.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		74466BA41E5760FB0032382F /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		74466BA61E5761F90032382F /* SafariApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariApplication.swift; sourceTree = "<group>"; };
 		744970C31E5397C60088C63C /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
 		744970C51E5397F30088C63C /* Alfred.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alfred.swift; sourceTree = "<group>"; };
 		744970C71E53981F0088C63C /* WindowInfo+AlfredItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WindowInfo+AlfredItem.swift"; sourceTree = "<group>"; };
@@ -42,17 +46,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74466BA51E5760FB0032382F /* ScriptingBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74466BA31E5760FB0032382F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				74466BA41E5760FB0032382F /* ScriptingBridge.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		74BA9E311E53270300C78C58 = {
 			isa = PBXGroup;
 			children = (
 				74BA9E3C1E53270300C78C58 /* EnumWindows */,
 				74BA9E3B1E53270300C78C58 /* Products */,
+				74466BA31E5760FB0032382F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +87,7 @@
 				744970C91E5398C30088C63C /* CommandLine+EnumWindows.swift */,
 				744970C31E5397C60088C63C /* Windows.swift */,
 				744970C71E53981F0088C63C /* WindowInfo+AlfredItem.swift */,
+				74466BA61E5761F90032382F /* SafariApplication.swift */,
 			);
 			path = EnumWindows;
 			sourceTree = "<group>";
@@ -139,6 +154,7 @@
 				744970CC1E5398E90088C63C /* Array+Search.swift in Sources */,
 				744970C61E5397F30088C63C /* Alfred.swift in Sources */,
 				74BA9E3E1E53270300C78C58 /* main.swift in Sources */,
+				74466BA71E5761F90032382F /* SafariApplication.swift in Sources */,
 				744970C81E53981F0088C63C /* WindowInfo+AlfredItem.swift in Sources */,
 				744970C41E5397C60088C63C /* Windows.swift in Sources */,
 			);
@@ -239,6 +255,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EnumWindows/EnumWindows-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -247,6 +264,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EnumWindows/EnumWindows-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
