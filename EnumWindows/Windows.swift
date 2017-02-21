@@ -11,6 +11,8 @@ class WindowInfo : Equatable {
     var name : String { return data.name }
     var processName : String { return data.processName }
     var pid : Int { return data.pid }
+    var tabIndex : Int { return data.tabIndex }
+    var windowTitle : String { return data.windowTitle }
     
     static func == (lhs: WindowInfo, rhs: WindowInfo) -> Bool {
         return lhs.processName == rhs.processName && lhs.name == rhs.name
@@ -30,6 +32,8 @@ protocol WindowInfoProtocol {
     var processName : String { get }
     var pid : Int { get }
     var searchStrings : [String] { get }
+    var tabIndex : Int { get }
+    var windowTitle : String { get }
 }
 
 class WindowInfoDict : WindowInfoProtocol {
@@ -43,6 +47,10 @@ class WindowInfoDict : WindowInfoProtocol {
         get {
             return self.dictItem(key: "kCGWindowName", defaultValue: "")
         }
+    }
+    
+    var windowTitle: String {
+        return self.name
     }
     
     var processName : String {
@@ -65,6 +73,10 @@ class WindowInfoDict : WindowInfoProtocol {
     
     var searchStrings: [String] {
         return [self.processName, self.name]
+    }
+    
+    var tabIndex: Int {
+        return 0
     }
     
     

@@ -3,9 +3,14 @@ import ScriptingBridge
 
 class SafariTab {
     private let tabRaw : AnyObject
+    private let index : Int?
     
-    init(raw: AnyObject) {
+    let windowTitle : String
+    
+    init(raw: AnyObject, index: Int?, windowTitle: String) {
         tabRaw = raw
+        self.index = index
+        self.windowTitle = windowTitle
     }
     
     var url : String {
@@ -36,6 +41,13 @@ class SafariTab {
         return result
     }
     
+    var tabIndex : Int {
+        guard let i = index else {
+            return 0
+        }
+        return i
+    }
+    
     /*
      (lldb) po raw.perform("URL").takeRetainedValue()
      https://encrypted.google.com/search?hl=en&q=objc%20mac%20list%20safari%20tabs#hl=en&q=swift+call+metho+by+name
@@ -63,8 +75,22 @@ class SafariWindow {
         }
         
         return result.map {
-            return SafariTab(raw: $0)
+            return SafariTab(raw: $0, index: $0.index, windowTitle: self.title)
         }
+    }
+    
+    var title : String {
+        let urlSelector = Selector(("name"))
+        let urlRaw = windowRaw.perform(urlSelector)
+        guard let urlString = urlRaw?.takeRetainedValue() else {
+            return ""
+        }
+        
+        guard let result = urlString as? String else {
+            return ""
+        }
+        
+        return result
     }
 }
 

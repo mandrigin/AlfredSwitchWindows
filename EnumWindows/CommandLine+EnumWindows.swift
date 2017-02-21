@@ -2,17 +2,13 @@ import Foundation
 
 protocol CommmandLineCommand {
     static func fromArgv(argv : String) -> CommmandLineCommand?
+    static var name : String { get }
+    init(value: String)
 }
 
-struct SearchCommand : CommmandLineCommand {
-    let query : String;
-    
-    init(query: String) {
-        self.query = query
-    }
-    
-    static func fromArgv(argv: String) -> CommmandLineCommand? {
-        let prefix = "--search="
+extension CommmandLineCommand {
+    static func fromArgv(argv : String) -> CommmandLineCommand? {
+        let prefix = "\(self.name)="
         guard argv.hasPrefix(prefix) else {
             return nil
         }
@@ -20,20 +16,30 @@ struct SearchCommand : CommmandLineCommand {
             .replacingOccurrences(of: prefix, with: "")
             .replacingOccurrences(of: "\"", with: "")
         
-        return SearchCommand(query: query)
+        return self.init(value: query)
+    }
+}
+
+struct SearchCommand : CommmandLineCommand {
+    internal static var name: String { return "--search" }
+
+    let query : String;
+    
+    init(value: String) {
+        self.query = value
     }
 }
 
 extension CommandLine {
     
     static func commands() -> [CommmandLineCommand] {
-        var result : [CommmandLineCommand] = []
+        var result : [CommmandLineCommand?] = []
         for arg in self.arguments {
-            guard let c = SearchCommand.fromArgv(argv: arg) else {
-                continue
-            }
-            result.append(c)
+            result.append(SearchCommand.fromArgv(argv: arg))
         }
-        return result
+        return result.flatMap { (command: CommmandLineCommand?) -> [CommmandLineCommand] in
+            guard let c = command else { return [] }
+            return [c]
+        }
     }
 }
