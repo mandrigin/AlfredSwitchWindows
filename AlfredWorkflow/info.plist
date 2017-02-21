@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>ru.mandrigin.alfred.sww</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>2A4DC329-9524-4CB9-BB77-7410877C746A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7686C74A-A33F-49C2-8231-40F1569A481A</key>
+		<array/>
+		<key>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7686C74A-A33F-49C2-8231-40F1569A481A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DE26058B-66D8-464C-B116-3C36FC69D3FA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7686C74A-A33F-49C2-8231-40F1569A481A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Igor Mandrigin</string>
+	<key>description</key>
+	<string>Switch between windows &amp; tabs on the same desktop</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Swift Window Switcher</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>ww</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Digging into safari tabs</string>
+				<key>script</key>
+				<string>import os
+import sys
+
+argv = sys.argv[1:]
+argvs = " ".join(argv)
+
+os.system("./EnumWindows --search=\"Safari %s\"" % argvs)</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>~/Desktop/EnumWindows/EnumWindows/EnumWindows</string>
+				<key>subtext</key>
+				<string>Enter the title of Safari tab</string>
+				<key>title</key>
+				<string>Search Safari tabs</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>DE26058B-66D8-464C-B116-3C36FC69D3FA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+
+set argv to extract_argv(q, "|||||")
+
+set proc to item 1 of argv
+set tabIndex to item 2 of argv as integer
+set windowName to item 3 of argv
+
+
+tell application "System Events"
+    tell process proc to perform action "AXRaise" of window windowName 
+end tell
+
+tell application proc
+    activate
+end tell
+
+log "before Safari"
+
+if proc = "Safari" then
+    tell front window of application "Safari"
+		set current tab to tab tabIndex
+	end tell
+end if
+
+end alfred_script
+
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>7686C74A-A33F-49C2-8231-40F1569A481A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>w</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>./EnumWindows --search="{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Write the title or the tab name</string>
+				<key>title</key>
+				<string>Switch between windows and tabs</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>1</integer>
+				<key>argument</key>
+				<integer>3</integer>
+				<key>argumenttext</key>
+				<string>w </string>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>-1</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>double tap</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>2A4DC329-9524-4CB9-BB77-7410877C746A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Workflow fow switching between active windows in the system and Safari tabs
+
+Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudozz! 🔥) [1].
+
+To make this workflow work, don't forget to allow Alfred to control your apps (Security &amp; Privacy → Accessibility)
+
+[1]: https://www.alfredforum.com/topic/9326-a-simple-windows-switcher/</string>
+	<key>uidata</key>
+	<dict>
+		<key>2A4DC329-9524-4CB9-BB77-7410877C746A</key>
+		<dict>
+			<key>xpos</key>
+			<integer>20</integer>
+			<key>ypos</key>
+			<integer>250</integer>
+		</dict>
+		<key>7686C74A-A33F-49C2-8231-40F1569A481A</key>
+		<dict>
+			<key>note</key>
+			<string>Hides the other processes.</string>
+			<key>xpos</key>
+			<integer>500</integer>
+			<key>ypos</key>
+			<integer>180</integer>
+		</dict>
+		<key>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>240</integer>
+			<key>ypos</key>
+			<integer>250</integer>
+		</dict>
+		<key>DE26058B-66D8-464C-B116-3C36FC69D3FA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>240</integer>
+			<key>ypos</key>
+			<integer>110</integer>
+		</dict>
+	</dict>
+	<key>version</key>
+	<string>0.2.0</string>
+	<key>webaddress</key>
+	<string>mandrigin.ru</string>
+</dict>
+</plist>

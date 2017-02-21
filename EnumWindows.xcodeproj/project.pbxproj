@@ -30,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		74236E301E5CBBEC007B6F1F /* AlfredWorkflow */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AlfredWorkflow; sourceTree = "<group>"; };
 		74466BA41E5760FB0032382F /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		74466BA61E5761F90032382F /* SafariApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariApplication.swift; sourceTree = "<group>"; };
 		744970C31E5397C60088C63C /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		74BA9E311E53270300C78C58 = {
 			isa = PBXGroup;
 			children = (
+				74236E301E5CBBEC007B6F1F /* AlfredWorkflow */,
 				74BA9E3C1E53270300C78C58 /* EnumWindows */,
 				74BA9E3B1E53270300C78C58 /* Products */,
 				74466BA31E5760FB0032382F /* Frameworks */,
