@@ -1,7 +1,37 @@
 import Foundation
 import ScriptingBridge
 
-class SafariTab {
+protocol SafariEntity {
+    var rawItem : AnyObject { get }
+}
+
+protocol SafariNamedEntity : SafariEntity {
+    var title : String { get }
+}
+
+extension SafariEntity {
+    func performSelectorByName<T>(name : String, defaultValue : T) -> T {
+        let sel = Selector(name)
+        let selectorResult = self.rawItem.perform(sel)
+        guard let retainedValue = selectorResult?.takeRetainedValue() else {
+            return defaultValue
+        }
+        
+        guard let result = retainedValue as? T else {
+            return defaultValue
+        }
+        
+        return result
+    }
+}
+
+extension SafariNamedEntity {
+    var title : String {
+        return performSelectorByName(name: "name", defaultValue: "")
+    }
+}
+
+class SafariTab : SafariNamedEntity {
     private let tabRaw : AnyObject
     private let index : Int?
     
@@ -13,32 +43,12 @@ class SafariTab {
         self.windowTitle = windowTitle
     }
     
-    var url : String {
-        let urlSelector = Selector(("URL"))
-        let urlRaw = tabRaw.perform(urlSelector)
-        guard let urlString = urlRaw?.takeRetainedValue() else {
-            return ""
-        }
-        
-        guard let result = urlString as? String else {
-            return ""
-        }
-        
-        return result
+    var rawItem: AnyObject {
+        return self.tabRaw
     }
     
-    var title : String {
-        let urlSelector = Selector(("name"))
-        let urlRaw = tabRaw.perform(urlSelector)
-        guard let urlString = urlRaw?.takeRetainedValue() else {
-            return ""
-        }
-        
-        guard let result = urlString as? String else {
-            return ""
-        }
-        
-        return result
+    var url : String {
+        return performSelectorByName(name: "URL", defaultValue: "")
     }
     
     var tabIndex : Int {
@@ -58,45 +68,29 @@ class SafariTab {
  */
 }
 
-class SafariWindow {
+class SafariWindow : SafariNamedEntity {
     private let windowRaw : AnyObject
     
     init(raw: AnyObject) {
         windowRaw = raw
     }
     
+    var rawItem: AnyObject {
+        return self.windowRaw
+    }
+    
     var tabs : [SafariTab] {
-        let tabsSel = Selector(("tabs"))
-        
-        let rawResult = windowRaw.perform(tabsSel)
-        
-        guard let result = rawResult?.takeRetainedValue() as? [AnyObject] else {
-            return []
-        }
+        let result = performSelectorByName(name: "tabs", defaultValue: [AnyObject]())
         
         return result.map {
             return SafariTab(raw: $0, index: $0.index, windowTitle: self.title)
         }
     }
-    
-    var title : String {
-        let urlSelector = Selector(("name"))
-        let urlRaw = windowRaw.perform(urlSelector)
-        guard let urlString = urlRaw?.takeRetainedValue() else {
-            return ""
-        }
-        
-        guard let result = urlString as? String else {
-            return ""
-        }
-        
-        return result
-    }
 }
 
-class SafariApplication {
+class SafariApplication : SafariEntity {
     
-    private let app : SBApplication?
+    private let app : SBApplication
     
     static func create() -> SafariApplication? {
         guard let app = SBApplication(bundleIdentifier: "com.apple.Safari") else {
@@ -110,15 +104,12 @@ class SafariApplication {
         self.app = app
     }
     
+    var rawItem: AnyObject {
+        return app
+    }
+    
     var windows : [SafariWindow] {
-        let windowsSel = Selector(("windows"))
-        
-        let rawResult = app?.perform(windowsSel)
-        
-        guard let result = rawResult?.takeRetainedValue() as? [AnyObject] else {
-            return []
-        }
-        
+        let result = performSelectorByName(name: "windows", defaultValue: [AnyObject]())
         return result.map {
             return SafariWindow(raw: $0)
         }
