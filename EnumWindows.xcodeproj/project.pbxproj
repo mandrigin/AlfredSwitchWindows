@@ -126,6 +126,7 @@
 				TargetAttributes = {
 					74BA9E391E53270300C78C58 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = LADJFGFXHV;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -256,6 +257,8 @@
 		74BA9E421E53270300C78C58 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = LADJFGFXHV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EnumWindows/EnumWindows-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -265,6 +268,8 @@
 		74BA9E431E53270300C78C58 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = LADJFGFXHV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EnumWindows/EnumWindows-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
