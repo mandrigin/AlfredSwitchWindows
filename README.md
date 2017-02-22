@@ -1,11 +1,16 @@
 # Swift Windows Switcher
 
+My little "weekend" project.
 Alfred workflow to switch between open windows in the system and Safari tabs.
 
 ## Features
 - Switch between the open windows using Alfred
 - Switch between the Safari tabs using Alfred
 - Very quick comparing to the alternative implementations because of the native search implementation.
+
+## Releases
+
+You can download the ready-to-use `.workflow` files from [the releases page](/releases).
 
 ## Source code
 
