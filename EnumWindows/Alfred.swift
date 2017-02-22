@@ -14,6 +14,7 @@ protocol AlfredItem {
 extension AlfredItem {
 
     var arg : String { return "\(self.processName)|||||\(self.tabIndex)|||||\(self.title)" };
+    var icon : String { return AppIcon(appName: self.processName).path };
 
     var xmlNode : XMLNode {
         /*
