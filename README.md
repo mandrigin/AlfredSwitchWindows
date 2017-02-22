@@ -10,7 +10,7 @@ Alfred workflow to switch between open windows in the system and Safari tabs.
 
 ## Releases
 
-You can download the ready-to-use `.workflow` files from [the releases page](/releases).
+You can download the ready-to-use `.workflow` files from [the releases page](https://github.com/mandrigin/AlfredSwitchWindows/releases).
 
 ## Source code
 
