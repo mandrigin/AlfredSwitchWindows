@@ -31,7 +31,7 @@ extension SafariNamedEntity {
     }
 }
 
-class SafariTab : SafariNamedEntity {
+class SafariTab : SafariNamedEntity, Searchable {
     private let tabRaw : AnyObject
     private let index : Int?
     
@@ -56,6 +56,10 @@ class SafariTab : SafariNamedEntity {
             return 0
         }
         return i
+    }
+    
+    var searchStrings : [String] {
+        return [SafariApplication.processName, self.url, self.title]
     }
     
     /*
@@ -91,6 +95,8 @@ class SafariWindow : SafariNamedEntity {
 class SafariApplication : SafariEntity {
     
     private let app : SBApplication
+    
+    static let processName = "Safari"
     
     static func create() -> SafariApplication? {
         guard let app = SBApplication(bundleIdentifier: "com.apple.Safari") else {

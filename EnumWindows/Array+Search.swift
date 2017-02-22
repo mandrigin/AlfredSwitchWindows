@@ -1,7 +1,11 @@
 import Foundation
 
-extension Array where Element:WindowInfo {
-    func search(query: String) -> [WindowInfo] {
+protocol Searchable {
+    var searchStrings : [String] { get }
+}
+
+extension Array where Element:Searchable {
+    func search(query: String) -> [Element] {
         guard query.characters.count > 0 else {
             return self
         }
@@ -9,7 +13,7 @@ extension Array where Element:WindowInfo {
         return search(components: components)
     }
     
-    private func search(components: ArraySlice<String>) -> [WindowInfo] {
+    private func search(components: ArraySlice<String>) -> [Element] {
         guard let q = components.first else {
             return self
         }
