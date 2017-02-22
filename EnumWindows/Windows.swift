@@ -27,6 +27,18 @@ class WindowInfoDict : Searchable {
         return self.dictItem(key: "kCGWindowOwnerPID", defaultValue: -1)
     }
     
+    var bounds : CGRect {
+        let dict = self.dictItem(key: "kCGWindowBounds", defaultValue: NSDictionary())
+        guard let bounds = CGRect.init(dictionaryRepresentation: dict) else {
+            return CGRect.zero
+        }
+        return bounds
+    }
+    
+    var alpha : Float {
+        return self.dictItem(key: "kCGWindowAlpha", defaultValue: 0.0)
+    }
+    
     var tabIndex: Int {
         return 0
     }
@@ -49,6 +61,16 @@ class WindowInfoDict : Searchable {
     var searchStrings: [String] {
         return [self.processName, self.name]
     }
+    
+    var isProbablyMenubarItem : Bool {
+        // Our best guess, if it's very small and attached to the top of the screen, it is probably something
+        // related to the menubar
+        return self.bounds.minY <= 0 || self.bounds.height < 30
+    }
+    
+    var isVisible : Bool {
+        return self.alpha > 0
+    }
 }
 
 struct Windows {
@@ -65,7 +87,8 @@ struct Windows {
                 
                 let wi = WindowInfoDict(rawDict: windowInfoRef)
                 
-                guard wi.name.characters.count > 0 else {
+                // We don't want to clutter our output with unnecessary windows that we can't switch to anyway.
+                guard wi.name.characters.count > 0 && !wi.isProbablyMenubarItem && wi.isVisible else {
                     return []
                 }
                 
