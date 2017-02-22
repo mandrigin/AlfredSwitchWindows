@@ -3,6 +3,8 @@
 My little "weekend" project.
 Alfred workflow to switch between open windows in the system and Safari tabs.
 
+![](/demo_concise.gif)
+
 ## Features
 - Switch between the open windows using Alfred
 - Switch between the Safari tabs using Alfred
@@ -24,7 +26,7 @@ It turns out, that `ScriptingBridge` implementation is not fully compatible with
 
 One of the possible solutions to this issue is demonstrated in [SafariApplication.swift](EnumWindows/SafariApplication.swift)
 
-## License 
+## License
 
 Copyright 2017 © Igor Mandrigin
 
