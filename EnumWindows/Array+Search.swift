@@ -9,7 +9,12 @@ extension Array where Element:Searchable {
         guard query.characters.count > 0 else {
             return self
         }
-        let components : ArraySlice<String> = ArraySlice(query.components(separatedBy:  " "))
+        let components : ArraySlice<String> =
+            ArraySlice(
+                query.components(separatedBy:  " ")
+                    .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter { $0.characters.count > 0 }
+            )
         return search(components: components)
     }
     
