@@ -80,15 +80,9 @@
 				<key>runningsubtext</key>
 				<string>Digging into safari tabs</string>
 				<key>script</key>
-				<string>import os
-import sys
-
-argv = sys.argv[1:]
-argvs = " ".join(argv)
-
-os.system("./EnumWindows --search=\"Safari %s\"" % argvs)</string>
+				<string>./EnumWindows --search="Safari {query}"</string>
 				<key>scriptargtype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>scriptfile</key>
 				<string>~/Desktop/EnumWindows/EnumWindows/EnumWindows</string>
 				<key>subtext</key>
@@ -96,7 +90,7 @@ os.system("./EnumWindows --search=\"Safari %s\"" % argvs)</string>
 				<key>title</key>
 				<string>Search Safari tabs</string>
 				<key>type</key>
-				<integer>3</integer>
+				<integer>0</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -268,7 +262,7 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.1</string>
+	<string>0.2.2</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>
