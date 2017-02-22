@@ -7,9 +7,14 @@ protocol AlfredItem {
     var title : String { get };
     var icon : String { get };
     var subtitle : String { get };
+    var processName : String { get };
+    var tabIndex : Int { get };
 }
 
 extension AlfredItem {
+
+    var arg : String { return "\(self.processName)|||||\(self.tabIndex)|||||\(self.title)" };
+
     var xmlNode : XMLNode {
         /*
          <item uid="1"
