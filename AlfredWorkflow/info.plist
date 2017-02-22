@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>ru.mandrigin.alfred.sww</string>
-	<key>category</key>
-	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
 		<key>2A4DC329-9524-4CB9-BB77-7410877C746A</key>
@@ -270,7 +268,7 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.0</string>
+	<string>0.2.1</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>
