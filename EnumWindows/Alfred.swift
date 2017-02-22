@@ -1,8 +1,24 @@
 import Foundation
 
+struct AlfredArg {
+    private let arg1 : String
+    private let arg2 : String
+    private let arg3 : String
+    
+    init(arg1: String, arg2: String, arg3: String) {
+        self.arg1 = arg1
+        self.arg2 = arg2
+        self.arg3 = arg3
+    }
+    
+    var serialized : String {
+        return "\(self.arg1)|||||\(self.arg2)|||||\(self.arg3)"
+    }
+}
+
 protocol AlfredItem {
     var uid : String { get };
-    var arg : String { get };
+    var arg : AlfredArg { get };
     var autocomplete : String { get };
     var title : String { get };
     var icon : String { get };
@@ -11,9 +27,9 @@ protocol AlfredItem {
     var tabIndex : Int { get };
 }
 
+
 extension AlfredItem {
 
-    var arg : String { return "\(self.processName)|||||\(self.tabIndex)|||||\(self.title)" };
     var icon : String { return AppIcon(appName: self.processName).path };
 
     var xmlNode : XMLNode {
@@ -29,7 +45,7 @@ extension AlfredItem {
         let element = XMLElement(name: "item")
         
         element.addAttribute(XMLNode.attribute(withName: "uid", stringValue: self.uid) as! XMLNode)
-        element.addAttribute(XMLNode.attribute(withName: "arg", stringValue: self.arg) as! XMLNode)
+        element.addAttribute(XMLNode.attribute(withName: "arg", stringValue: self.arg.serialized) as! XMLNode)
         element.addAttribute(XMLNode.attribute(withName: "autocomplete", stringValue: self.autocomplete) as! XMLNode)
         
         let titleElement = XMLElement(name: "title")
