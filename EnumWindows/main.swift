@@ -7,10 +7,9 @@ func searchWindowsExceptSafari(query: String) -> [AlfredItem] {
 
 
 func searchSafariTabs(query: String) -> [AlfredItem] {
-    guard let s = SafariApplication.create() else {
-        return []
-    }
-    return s.windows.flatMap { return $0.tabs }.search(query: query)
+    return SafariApplication.create()?.windows
+            .flatMap { return $0.tabs }
+            .search(query: query) ?? []
 }
 
 func search(query: String) {

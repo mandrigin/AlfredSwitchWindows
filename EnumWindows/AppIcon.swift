@@ -18,35 +18,35 @@ struct AppIcon {
     }
     
     var path : String {
-        guard let path = self.pathInternal else {
-            return "switch.png"
-        }
-        
-        return path
+        return self.pathInternal ?? "switch.png"
     }
     
     private var pathInternal : String? {
-        let workspace = NSWorkspace.shared()
+        let appPath = self.appName | { NSWorkspace.shared().fullPath(forApplication: $0) }
         
-        guard let appPath = workspace.fullPath(forApplication: self.appName) else {
+        guard let iconFileName = appPath | { Bundle(path: $0) } | { $0.infoDictionary?["CFBundleIconFile"] } | { $0 as? String } else {
             return nil
         }
         
-        let bundle = Bundle(path: appPath)
+        let url = appPath | { URL(fileURLWithPath: $0) } | { $0.appendingPathComponent("Contents/Resources/\(iconFileName).icns") }
         
-        guard let iconFileNameObj = bundle?.infoDictionary?["CFBundleIconFile"] else {
-            return nil
-        }
-        
-        guard let iconFileName = iconFileNameObj as? String else {
-            return nil
-        }
-        
-        let url = URL(fileURLWithPath: appPath)
-                .appendingPathComponent("Contents")
-                .appendingPathComponent("Resources")
-                .appendingPathComponent("\(iconFileName).icns")
-        
-        return url.path
+        return url?.path ?? nil
     }
+}
+
+/**
+ * Just having fun with the pipelining
+ */
+precedencegroup PipelinePrecedence {
+    associativity: left
+    higherThan: LogicalConjunctionPrecedence
+}
+infix operator | : PipelinePrecedence
+
+func | <A, B> (lhs : A?, rhs : (A) -> B?) -> B? {
+    guard let l = lhs else {
+        return nil
+    }
+    
+    return rhs(l)
 }

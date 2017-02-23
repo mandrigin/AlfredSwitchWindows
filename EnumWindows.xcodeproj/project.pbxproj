@@ -59,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7423A40E1E5F7BCD009F5325 /* AppsSupport */ = {
+			isa = PBXGroup;
+			children = (
+				74466BA61E5761F90032382F /* SafariApplication.swift */,
+			);
+			name = AppsSupport;
+			sourceTree = "<group>";
+		};
 		74466BA31E5760FB0032382F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,13 +97,13 @@
 		74BA9E3C1E53270300C78C58 /* EnumWindows */ = {
 			isa = PBXGroup;
 			children = (
+				7423A40E1E5F7BCD009F5325 /* AppsSupport */,
 				74BA9E3D1E53270300C78C58 /* main.swift */,
 				744970C51E5397F30088C63C /* Alfred.swift */,
 				744970CB1E5398E90088C63C /* Array+Search.swift */,
 				744970C91E5398C30088C63C /* CommandLine+EnumWindows.swift */,
 				744970C31E5397C60088C63C /* Windows.swift */,
 				744970C71E53981F0088C63C /* AlfredItems.swift */,
-				74466BA61E5761F90032382F /* SafariApplication.swift */,
 				7439217E1E5DE92100720BFB /* AppIcon.swift */,
 			);
 			path = EnumWindows;
