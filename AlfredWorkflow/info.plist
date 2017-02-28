@@ -202,7 +202,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>hotkey</key>
 				<integer>-1</integer>
 				<key>hotmod</key>
-				<integer>1048576</integer>
+				<integer>262144</integer>
 				<key>hotstring</key>
 				<string>double tap</string>
 				<key>leftcursor</key>
@@ -262,7 +262,7 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.2</string>
+	<string>0.2.3</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>
