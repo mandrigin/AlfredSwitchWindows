@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 import ScriptingBridge
 
 protocol SafariEntity {
@@ -99,10 +100,15 @@ class SafariApplication : SafariEntity {
     static let processName = "Safari"
     
     static func create() -> SafariApplication? {
-        guard let app = SBApplication(bundleIdentifier: "com.apple.Safari") else {
+        guard let fullPath = NSWorkspace.shared().fullPath(forApplication: self.processName) else {
             return nil
         }
-        
+
+        let bundle = Bundle(path: fullPath)
+        guard let app = SBApplication(bundleIdentifier: bundle?.bundleIdentifier ?? "") else {
+            return nil
+        }
+
         return SafariApplication(app: app)
     }
     
