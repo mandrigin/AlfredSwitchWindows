@@ -1,8 +1,8 @@
 import Foundation
 
 
-func searchWindowsExceptSafari(query: String) -> [AlfredItem] {
-    return Windows.all.search(query: query).filter { $0.processName != SafariApplication.processName }
+func searchWindows(query: String, exceptSafari: Bool) -> [AlfredItem] {
+    return Windows.all.search(query: query).filter { !exceptSafari || ($0.processName != SafariApplication.processName) }
 }
 
 
@@ -13,9 +13,10 @@ func searchSafariTabs(query: String) -> [AlfredItem] {
 }
 
 func search(query: String) {
+    let safariTabs = searchSafariTabs(query: query)
     let alfredItems = [
-        searchWindowsExceptSafari(query: query),
-        searchSafariTabs(query: query)
+        searchWindows(query: query, exceptSafari: safariTabs.count > 0),
+        safariTabs,
     ].flatMap { $0 }
 
     print(AlfredDocument(withItems: alfredItems).xml.xmlString)
