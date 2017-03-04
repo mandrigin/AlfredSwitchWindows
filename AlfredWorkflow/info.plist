@@ -113,14 +113,10 @@ set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
-
-tell application "System Events"
-    tell process proc to perform action "AXRaise" of window windowName 
-end tell
-
-tell application proc
-    activate
-end tell
+set theFoundIndex to 1tell application proc	repeat with i from 1 to count windows		set wn to name of window i				if wn = windowName then			set theFoundIndex to i		end if	end repeat
+    log "Foregrounding window: " &amp; windowName &amp; " with index: " &amp; theFoundIndex
+	
+    set index of window theFoundIndex to 1	set visible of window theFoundIndex to false	set visible of window theFoundIndex to true	activate	end tell
 
 log "before Safari"
 
