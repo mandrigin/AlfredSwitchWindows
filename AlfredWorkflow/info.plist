@@ -134,7 +134,7 @@ end alfred_script
 
 on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
 				<key>cachescript</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.applescript</string>
@@ -262,7 +262,7 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.4</string>
+	<string>0.2.5</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>
