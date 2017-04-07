@@ -2,15 +2,15 @@ import Foundation
 import AppKit
 import ScriptingBridge
 
-protocol SafariEntity {
+protocol BrowserEntity {
     var rawItem : AnyObject { get }
 }
 
-protocol SafariNamedEntity : SafariEntity {
+protocol BrowserNamedEntity : BrowserEntity {
     var title : String { get }
 }
 
-extension SafariEntity {
+extension BrowserEntity {
     func performSelectorByName<T>(name : String, defaultValue : T) -> T {
         let sel = Selector(name)
         let selectorResult = self.rawItem.perform(sel)
@@ -26,22 +26,28 @@ extension SafariEntity {
     }
 }
 
-extension SafariNamedEntity {
+extension BrowserNamedEntity {
     var title : String {
-        return performSelectorByName(name: "name", defaultValue: "")
+        /* Safari uses 'name' as the tab title, while most of the browsers have 'title' there */
+        if self.rawItem.responds(to: Selector("name")) {
+            return performSelectorByName(name: "name", defaultValue: "")
+        }
+        return performSelectorByName(name: "title", defaultValue: "")
     }
 }
 
-class SafariTab : SafariNamedEntity, Searchable {
+class BrowserTab : BrowserNamedEntity, Searchable {
     private let tabRaw : AnyObject
     private let index : Int?
     
     let windowTitle : String
+    let processName : String
     
-    init(raw: AnyObject, index: Int?, windowTitle: String) {
+    init(raw: AnyObject, index: Int?, windowTitle: String, processName: String) {
         tabRaw = raw
         self.index = index
         self.windowTitle = windowTitle
+        self.processName = processName
     }
     
     var rawItem: AnyObject {
@@ -60,47 +66,48 @@ class SafariTab : SafariNamedEntity, Searchable {
     }
     
     var searchStrings : [String] {
-        return [SafariApplication.processName, self.url, self.title]
+        return ["Browser", self.url, self.title]
     }
     
     /*
      (lldb) po raw.perform("URL").takeRetainedValue()
-     https://encrypted.google.com/search?hl=en&q=objc%20mac%20list%20safari%20tabs#hl=en&q=swift+call+metho+by+name
+     https://encrypted.google.com/search?hl=en&q=objc%20mac%20list%20Browser%20tabs#hl=en&q=swift+call+metho+by+name
      
      
      (lldb) po raw.perform("name").takeRetainedValue()
-     scriptingbridge safaritab - Google Search
+     scriptingbridge Browsertab - Google Search
  */
 }
 
-class SafariWindow : SafariNamedEntity {
+class BrowserWindow : BrowserNamedEntity {
     private let windowRaw : AnyObject
     
-    init(raw: AnyObject) {
+    let processName : String
+    
+    init(raw: AnyObject, processName: String) {
         windowRaw = raw
+        self.processName = processName
     }
     
     var rawItem: AnyObject {
         return self.windowRaw
     }
     
-    var tabs : [SafariTab] {
+    var tabs : [BrowserTab] {
         let result = performSelectorByName(name: "tabs", defaultValue: [AnyObject]())
         
         return result.enumerated().map { (index, element) in
-            return SafariTab(raw: element, index: index + 1, windowTitle: self.title)
+            return BrowserTab(raw: element, index: index + 1, windowTitle: self.title, processName: self.processName)
         }
     }
 }
 
-class SafariApplication : SafariEntity {
-    
+class BrowserApplication : BrowserEntity {
     private let app : SBApplication
+    private let processName : String
     
-    static let processName = "Safari"
-    
-    static func create() -> SafariApplication? {
-        guard let fullPath = NSWorkspace.shared().fullPath(forApplication: self.processName) else {
+    static func create(processName: String) -> BrowserApplication? {
+        guard let fullPath = NSWorkspace.shared().fullPath(forApplication: processName) else {
             return nil
         }
 
@@ -109,21 +116,22 @@ class SafariApplication : SafariEntity {
             return nil
         }
 
-        return SafariApplication(app: app)
+        return BrowserApplication(app: app, processName: processName)
     }
     
-    init(app: SBApplication) {
+    init(app: SBApplication, processName: String) {
         self.app = app
+        self.processName = processName
     }
     
     var rawItem: AnyObject {
         return app
     }
     
-    var windows : [SafariWindow] {
+    var windows : [BrowserWindow] {
         let result = performSelectorByName(name: "windows", defaultValue: [AnyObject]())
         return result.map {
-            return SafariWindow(raw: $0)
+            return BrowserWindow(raw: $0, processName: self.processName)
         }
     }
 }

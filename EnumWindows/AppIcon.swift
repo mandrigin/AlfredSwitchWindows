@@ -24,11 +24,15 @@ struct AppIcon {
     private var pathInternal : String? {
         let appPath = self.appName | { NSWorkspace.shared().fullPath(forApplication: $0) }
         
-        guard let iconFileName = appPath | { Bundle(path: $0) } | { $0.infoDictionary?["CFBundleIconFile"] } | { $0 as? String } else {
+        guard var iconFileName = appPath | { Bundle(path: $0) } | { $0.infoDictionary?["CFBundleIconFile"] } | { $0 as? String } else {
             return nil
         }
         
-        let url = appPath | { URL(fileURLWithPath: $0) } | { $0.appendingPathComponent("Contents/Resources/\(iconFileName).icns") }
+        if !iconFileName.hasSuffix(".icns") {
+            iconFileName.append(".icns")
+        }
+        
+        let url = appPath | { URL(fileURLWithPath: $0) } | { $0.appendingPathComponent("Contents/Resources/\(iconFileName)") }
         
         return url?.path ?? nil
     }

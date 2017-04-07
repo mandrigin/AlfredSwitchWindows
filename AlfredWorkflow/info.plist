@@ -130,6 +130,12 @@ if proc = "Safari" then
 	end tell
 end if
 
+if proc = "Google Chrome" then
+    tell application "Google Chrome"
+        set active tab index of front window to tabIndex
+    end tell
+end if
+
 end alfred_script
 
 on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>

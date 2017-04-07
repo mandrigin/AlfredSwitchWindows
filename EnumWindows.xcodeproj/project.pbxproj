@@ -10,7 +10,7 @@
 		7439217F1E5DE92100720BFB /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7439217E1E5DE92100720BFB /* AppIcon.swift */; };
 		743921811E5DEDF100720BFB /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 743921801E5DEDF100720BFB /* AppKit.framework */; };
 		74466BA51E5760FB0032382F /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74466BA41E5760FB0032382F /* ScriptingBridge.framework */; };
-		74466BA71E5761F90032382F /* SafariApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74466BA61E5761F90032382F /* SafariApplication.swift */; };
+		74466BA71E5761F90032382F /* BrowserApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74466BA61E5761F90032382F /* BrowserApplication.swift */; };
 		744970C41E5397C60088C63C /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C31E5397C60088C63C /* Windows.swift */; };
 		744970C61E5397F30088C63C /* Alfred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C51E5397F30088C63C /* Alfred.swift */; };
 		744970C81E53981F0088C63C /* AlfredItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C71E53981F0088C63C /* AlfredItems.swift */; };
@@ -36,7 +36,7 @@
 		7439217E1E5DE92100720BFB /* AppIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		743921801E5DEDF100720BFB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		74466BA41E5760FB0032382F /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
-		74466BA61E5761F90032382F /* SafariApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariApplication.swift; sourceTree = "<group>"; };
+		74466BA61E5761F90032382F /* BrowserApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserApplication.swift; sourceTree = "<group>"; };
 		744970C31E5397C60088C63C /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
 		744970C51E5397F30088C63C /* Alfred.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alfred.swift; sourceTree = "<group>"; };
 		744970C71E53981F0088C63C /* AlfredItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlfredItems.swift; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 		7423A40E1E5F7BCD009F5325 /* AppsSupport */ = {
 			isa = PBXGroup;
 			children = (
-				74466BA61E5761F90032382F /* SafariApplication.swift */,
+				74466BA61E5761F90032382F /* BrowserApplication.swift */,
 			);
 			name = AppsSupport;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 				744970CC1E5398E90088C63C /* Array+Search.swift in Sources */,
 				744970C61E5397F30088C63C /* Alfred.swift in Sources */,
 				74BA9E3E1E53270300C78C58 /* main.swift in Sources */,
-				74466BA71E5761F90032382F /* SafariApplication.swift in Sources */,
+				74466BA71E5761F90032382F /* BrowserApplication.swift in Sources */,
 				744970C81E53981F0088C63C /* AlfredItems.swift in Sources */,
 				7439217F1E5DE92100720BFB /* AppIcon.swift in Sources */,
 				744970C41E5397C60088C63C /* Windows.swift in Sources */,
