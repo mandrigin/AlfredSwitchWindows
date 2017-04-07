@@ -87,8 +87,8 @@ class SafariWindow : SafariNamedEntity {
     var tabs : [SafariTab] {
         let result = performSelectorByName(name: "tabs", defaultValue: [AnyObject]())
         
-        return result.map {
-            return SafariTab(raw: $0, index: $0.index, windowTitle: self.title)
+        return result.enumerated().map { (index, element) in
+            return SafariTab(raw: element, index: index + 1, windowTitle: self.title)
         }
     }
 }
