@@ -80,7 +80,7 @@
 				<key>runningsubtext</key>
 				<string>Digging into safari tabs</string>
 				<key>script</key>
-				<string>./EnumWindows --search="Safari {query}"</string>
+				<string>./EnumWindows --search-tabs="{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -227,7 +227,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Workflow fow switching between active windows in the system and Safari tabs
+	<string>Workflow fow switching between active windows in the system and Safari/Chrome tabs
 
 Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudozz! 🔥) [1].
 
@@ -268,7 +268,7 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.5</string>
+	<string>0.2.6</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>

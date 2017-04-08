@@ -20,6 +20,16 @@ extension CommmandLineCommand {
     }
 }
 
+struct OnlyTabsCommand : CommmandLineCommand {
+    internal static var name: String { return "--search-tabs" }
+    
+    let query : String;
+    
+    init(value: String) {
+        self.query = value
+    }
+}
+
 struct SearchCommand : CommmandLineCommand {
     internal static var name: String { return "--search" }
 
@@ -36,6 +46,7 @@ extension CommandLine {
         var result : [CommmandLineCommand?] = []
         for arg in self.arguments {
             result.append(SearchCommand.fromArgv(argv: arg))
+            result.append(OnlyTabsCommand.fromArgv(argv: arg))
         }
         return result.flatMap { (command: CommmandLineCommand?) -> [CommmandLineCommand] in
             guard let c = command else { return [] }

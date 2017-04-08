@@ -20,7 +20,7 @@ func searchBrowserTabsIfNeeded(processName: String, windows: [WindowInfoDict], q
     return (browserTabs, activeWindowsExceptBrowser)
 }
 
-func search(query: String) {
+func search(query: String, onlyTabs: Bool) {
     let allActiveWindows = Windows.all
     
     let (safariTabs, filteredWindows) = searchBrowserTabsIfNeeded(processName: "Safari",
@@ -32,7 +32,7 @@ func search(query: String) {
                                                                    query: query)
     
     let alfredItems : [AlfredItem] = [
-        filteredWindows2.search(query: query),
+        onlyTabs ? [] : filteredWindows2.search(query: query),
         safariTabs,
         chromeTabs,
     ].flatMap { $0 }
@@ -44,7 +44,10 @@ func search(query: String) {
 for command in CommandLine.commands() {
     switch command {
     case let searchCommand as SearchCommand:
-        search(query: searchCommand.query)
+        search(query: searchCommand.query, onlyTabs: false)
+        exit(0)
+    case let searchCommand as OnlyTabsCommand:
+        search(query: searchCommand.query, onlyTabs: true)
         exit(0)
     default:
         print("Unknown command!")
