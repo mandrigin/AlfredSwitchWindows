@@ -106,13 +106,27 @@ class BrowserApplication : BrowserEntity {
     private let app : SBApplication
     private let processName : String
     
-    static func create(processName: String) -> BrowserApplication? {
-        guard let fullPath = NSWorkspace.shared().fullPath(forApplication: processName) else {
+    static func connect(processName: String) -> BrowserApplication? {
+
+        let ws = NSWorkspace.shared()
+
+        guard let fullPath = ws.fullPath(forApplication: processName) else {
             return nil
         }
 
         let bundle = Bundle(path: fullPath)
-        guard let app = SBApplication(bundleIdentifier: bundle?.bundleIdentifier ?? "") else {
+        
+        guard let bundleId = bundle?.bundleIdentifier else {
+            return nil
+        }
+        
+        let runningBrowsers = ws.runningApplications.filter { $0.bundleIdentifier == bundleId }
+        
+        guard runningBrowsers.count > 0 else {
+            return nil
+        }
+        
+        guard let app = SBApplication(bundleIdentifier: bundleId) else {
             return nil
         }
 

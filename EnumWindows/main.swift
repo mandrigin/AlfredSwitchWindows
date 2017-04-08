@@ -2,7 +2,7 @@ import Foundation
 
 
 func searchBrowserTabs(processName: String, query: String) -> [AlfredItem] {
-    return BrowserApplication.create(processName: processName)?.windows
+    return BrowserApplication.connect(processName: processName)?.windows
             .flatMap { return $0.tabs }
             .search(query: query) ?? []
 }
@@ -11,11 +11,8 @@ func searchBrowserTabs(processName: String, query: String) -> [AlfredItem] {
 func searchBrowserTabsIfNeeded(processName: String, windows: [WindowInfoDict], query: String) -> ([AlfredItem], [WindowInfoDict]) {
     
     let activeWindowsExceptBrowser = windows.filter { ($0.processName != processName) }
-    let browserIsRunning = activeWindowsExceptBrowser.count < windows.count
     
-    // `searchSafariTabs` will open Safari it it is not running. We want to avoid this behaviour,
-    // so if no Safari process is there — don't search for tabs.
-    let browserTabs = browserIsRunning ? searchBrowserTabs(processName: processName, query: query) : []
+    let browserTabs = searchBrowserTabs(processName: processName, query: query)
     
     return (browserTabs, activeWindowsExceptBrowser)
 }
