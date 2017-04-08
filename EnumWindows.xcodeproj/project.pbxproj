@@ -17,6 +17,7 @@
 		744970CA1E5398C30088C63C /* CommandLine+EnumWindows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970C91E5398C30088C63C /* CommandLine+EnumWindows.swift */; };
 		744970CC1E5398E90088C63C /* Array+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744970CB1E5398E90088C63C /* Array+Search.swift */; };
 		74BA9E3E1E53270300C78C58 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BA9E3D1E53270300C78C58 /* main.swift */; };
+		74FFC9621E98E7AA00EAA0FA /* ProcessNameProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FFC9611E98E7AA00EAA0FA /* ProcessNameProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +45,7 @@
 		744970CB1E5398E90088C63C /* Array+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Search.swift"; sourceTree = "<group>"; };
 		74BA9E3A1E53270300C78C58 /* EnumWindows */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EnumWindows; sourceTree = BUILT_PRODUCTS_DIR; };
 		74BA9E3D1E53270300C78C58 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		74FFC9611E98E7AA00EAA0FA /* ProcessNameProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessNameProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				744970C31E5397C60088C63C /* Windows.swift */,
 				744970C71E53981F0088C63C /* AlfredItems.swift */,
 				7439217E1E5DE92100720BFB /* AppIcon.swift */,
+				74FFC9611E98E7AA00EAA0FA /* ProcessNameProtocol.swift */,
 			);
 			path = EnumWindows;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				744970C81E53981F0088C63C /* AlfredItems.swift in Sources */,
 				7439217F1E5DE92100720BFB /* AppIcon.swift in Sources */,
 				744970C41E5397C60088C63C /* Windows.swift in Sources */,
+				74FFC9621E98E7AA00EAA0FA /* ProcessNameProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

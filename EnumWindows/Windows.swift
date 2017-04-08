@@ -1,6 +1,6 @@
 import Foundation
 
-class WindowInfoDict : Searchable {
+class WindowInfoDict : Searchable, ProcessNameProtocol {
     private let windowInfoDict : Dictionary<NSObject, AnyObject>;
     
     init(rawDict : UnsafeRawPointer) {

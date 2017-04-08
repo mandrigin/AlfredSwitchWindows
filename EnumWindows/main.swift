@@ -1,38 +1,40 @@
 import Foundation
 
-
-func searchBrowserTabs(processName: String, query: String) -> [AlfredItem] {
-    return BrowserApplication.connect(processName: processName)?.windows
-            .flatMap { return $0.tabs }
-            .search(query: query) ?? []
-}
-
-
-func searchBrowserTabsIfNeeded(processName: String, windows: [WindowInfoDict], query: String) -> ([AlfredItem], [WindowInfoDict]) {
+/// Removes browser window from the list of windows and adds tabs to the results array
+func searchBrowserTabsIfNeeded(processName: String,
+                               windows: [WindowInfoDict],
+                               query: String,
+                               results: inout [[AlfredItem]]) -> [WindowInfoDict] {
     
     let activeWindowsExceptBrowser = windows.filter { ($0.processName != processName) }
     
-    let browserTabs = searchBrowserTabs(processName: processName, query: query)
+    let browserTabs =
+        BrowserApplication.connect(processName: processName)?.windows
+            .flatMap { return $0.tabs }
+            .search(query: query)
     
-    return (browserTabs, activeWindowsExceptBrowser)
+    results.append(browserTabs ?? [])
+    
+    return activeWindowsExceptBrowser
 }
 
 func search(query: String, onlyTabs: Bool) {
-    let allActiveWindows = Windows.all
+    var results : [[AlfredItem]] = []
     
-    let (safariTabs, filteredWindows) = searchBrowserTabsIfNeeded(processName: "Safari",
-                                                                  windows: allActiveWindows,
-                                                                  query: query)
+    var allActiveWindows : [WindowInfoDict] = Windows.all
     
-    let (chromeTabs, filteredWindows2) = searchBrowserTabsIfNeeded(processName: "Google Chrome",
-                                                                   windows: filteredWindows,
-                                                                   query: query)
+    for browserName in ["Safari", "Google Chrome"] {
+        allActiveWindows = searchBrowserTabsIfNeeded(processName: browserName,
+                                                     windows: allActiveWindows,
+                                                     query: query,
+                                                     results: &results) // inout!
+    }
     
-    let alfredItems : [AlfredItem] = [
-        onlyTabs ? [] : filteredWindows2.search(query: query),
-        safariTabs,
-        chromeTabs,
-    ].flatMap { $0 }
+    if !onlyTabs {
+        results.append(allActiveWindows.search(query: query))
+    }
+    
+    let alfredItems : [AlfredItem] = results.flatMap { $0 }
 
     print(AlfredDocument(withItems: alfredItems).xml.xmlString)
 }

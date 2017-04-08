@@ -36,7 +36,7 @@ extension BrowserNamedEntity {
     }
 }
 
-class BrowserTab : BrowserNamedEntity, Searchable {
+class BrowserTab : BrowserNamedEntity, Searchable, ProcessNameProtocol {
     private let tabRaw : AnyObject
     private let index : Int?
     
@@ -53,7 +53,7 @@ class BrowserTab : BrowserNamedEntity, Searchable {
     var rawItem: AnyObject {
         return self.tabRaw
     }
-    
+        
     var url : String {
         return performSelectorByName(name: "URL", defaultValue: "")
     }
