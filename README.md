@@ -24,7 +24,8 @@ It turns out, that `ScriptingBridge` implementation is not fully compatible with
 
 (Classes like `SafariApplication` are not imported, so we can't use them).
 
-One of the possible solutions to this issue is demonstrated in [SafariApplication.swift](EnumWindows/SafariApplication.swift)
+One of the possible solutions to this issue is demonstrated in [BrowserApplication.swift](EnumWindows/BrowserApplication.swift)
+(used for both Safari and Chrome automation)
 
 ## License
 
