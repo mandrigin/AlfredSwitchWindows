@@ -27,6 +27,33 @@ It turns out, that `ScriptingBridge` implementation is not fully compatible with
 One of the possible solutions to this issue is demonstrated in [BrowserApplication.swift](EnumWindows/BrowserApplication.swift)
 (used for both Safari and Chrome automation)
 
+**UPD:** There is a better solution using `optional` protocol methods:
+```swift
+@objc fileprivate enum PlayerState: NSInteger {
+    case stopped = 0x6b505353
+    case playing = 0x6b505350
+    case paused = 0x6b505370
+    case fastForwarding = 0x6b505346
+    case rewinding = 0x6b505352
+};
+
+@objc fileprivate protocol iTunesBridge {
+    @objc optional var isRunning: Bool { get }
+    @objc optional var playerState: PlayerState { get }
+    @objc optional func pause() -> Void
+}
+
+extension SBApplication: iTunesBridge{}
+
+guard let app = SBApplication(bundleIdentifier: "com.apple.iTunes") as? iTunesBridge else {
+   return
+}
+
+let isPlaying = app.playerState == .playing
+
+NSLog("isPlaying: \(isPlaying)")
+```
+
 ## License
 
 Copyright 2017 © Igor Mandrigin
