@@ -139,12 +139,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Igor Mandrigin";
 				TargetAttributes = {
 					74BA9E391E53270300C78C58 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = LADJFGFXHV;
+						DevelopmentTeam = JWS7GHGXT9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -275,6 +275,7 @@
 				SDKROOT = macosx;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -282,7 +283,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = LADJFGFXHV;
+				DEVELOPMENT_TEAM = JWS7GHGXT9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -292,7 +293,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = LADJFGFXHV;
+				DEVELOPMENT_TEAM = JWS7GHGXT9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

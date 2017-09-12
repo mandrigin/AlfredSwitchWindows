@@ -29,7 +29,7 @@ extension BrowserEntity {
 extension BrowserNamedEntity {
     var title : String {
         /* Safari uses 'name' as the tab title, while most of the browsers have 'title' there */
-        if self.rawItem.responds(to: Selector("name")) {
+        if self.rawItem.responds(to: #selector(getter: MTLFunction.name)) {
             return performSelectorByName(name: "name", defaultValue: "")
         }
         return performSelectorByName(name: "title", defaultValue: "")
