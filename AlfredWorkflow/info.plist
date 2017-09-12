@@ -137,6 +137,12 @@ if proc = "Safari" then
 	end tell
 end if
 
+if proc = "Safari Technology Preview" then
+    tell front window of application "Safari Technology Preview"
+        set current tab to tab tabIndex
+    end tell
+end if
+
 if proc = "Google Chrome" then
 	tell application "Google Chrome"
 		set active tab index of front window to tabIndex
@@ -146,7 +152,13 @@ end if
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript's text item delimiters
+	set AppleScript's text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript's text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -264,10 +276,22 @@ if proc = "Safari" then
 	end tell
 end if
 
+if proc = "Safari Technology Preview" then
+    tell front window of application "Safari Technology Preview"
+        set current tab to tab tabIndex
+    end tell
+end if
+
   return q
 end run
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript's text item delimiters
+	set AppleScript's text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript's text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -381,7 +405,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Workflow fow switching between active windows in the system and Safari/Chrome tabs
+	<string>Workflow fow switching between active windows in the system and Safari/Safari Technology Preview/Chrome tabs
 
 Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudozz! 🔥) [1].
 
