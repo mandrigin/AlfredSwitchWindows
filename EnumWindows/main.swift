@@ -23,7 +23,7 @@ func search(query: String, onlyTabs: Bool) {
     
     var allActiveWindows : [WindowInfoDict] = Windows.all
     
-    for browserName in ["Safari", "Google Chrome"] {
+    for browserName in ["Safari", "Safari Technology Preview", "Google Chrome"] {
         allActiveWindows = searchBrowserTabsIfNeeded(processName: browserName,
                                                      windows: allActiveWindows,
                                                      query: query,
