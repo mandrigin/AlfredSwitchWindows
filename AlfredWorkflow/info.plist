@@ -417,7 +417,7 @@ end extract_argv</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Workflow fow switching between active windows in the system and Safari/Safari Technology Preview/Chrome tabs
+	<string>Workflow fow switching between active windows in the system and Safari/Safari Technology Preview/Chrome/Firefox tabs
 
 Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudozz! 🔥) [1].
 
