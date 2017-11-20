@@ -41,6 +41,16 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A929FA78-5BAC-410C-8AD1-3C98D06EF222</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>2A4DC329-9524-4CB9-BB77-7410877C746A</key>
 		<array>
@@ -70,6 +80,19 @@
 		</array>
 		<key>7686C74A-A33F-49C2-8231-40F1569A481A</key>
 		<array/>
+		<key>A929FA78-5BAC-410C-8AD1-3C98D06EF222</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>43F99670-F274-4145-9E5A-4280ACCB45EA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</key>
 		<array>
 			<dict>
@@ -137,12 +160,6 @@ if proc = "Safari" then
 	end tell
 end if
 
-if proc = "Safari Technology Preview" then
-    tell front window of application "Safari Technology Preview"
-        set current tab to tab tabIndex
-    end tell
-end if
-
 if proc = "Google Chrome" then
 	tell application "Google Chrome"
 		set active tab index of front window to tabIndex
@@ -152,13 +169,7 @@ end if
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)
-	set backup to AppleScript's text item delimiters
-	set AppleScript's text item delimiters to new_delimiter
-	set argv to every text item of source_string
-	set AppleScript's text item delimiters to backup
-	return argv
-end extract_argv</string>
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -193,6 +204,8 @@ end extract_argv</string>
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -276,22 +289,10 @@ if proc = "Safari" then
 	end tell
 end if
 
-if proc = "Safari Technology Preview" then
-    tell front window of application "Safari Technology Preview"
-        set current tab to tab tabIndex
-    end tell
-end if
-
   return q
 end run
 
-on extract_argv(source_string, new_delimiter)
-	set backup to AppleScript's text item delimiters
-	set AppleScript's text item delimiters to new_delimiter
-	set argv to every text item of source_string
-	set AppleScript's text item delimiters to backup
-	return argv
-end extract_argv</string>
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -311,6 +312,8 @@ end extract_argv</string>
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -394,7 +397,7 @@ end extract_argv</string>
 				<key>matchmode</key>
 				<integer>1</integer>
 				<key>matchstring</key>
-				<string>Google Chrome.*</string>
+				<string>Safari (Beta|Technology).*</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.filter</string>
@@ -403,9 +406,81 @@ end extract_argv</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv
+  set q to item 1 of argv
+
+set argv to extract_argv(q, "|||||")
+
+set proc to item 1 of argv
+set tabIndex to item 2 of argv as integer
+set windowName to item 3 of argv
+
+try
+	tell application "System Events"
+		with timeout of 0.1 seconds
+			tell process proc to perform action "AXRaise" of window windowName 
+		end timeout
+	end tell
+end try
+
+tell application proc
+    activate
+end tell
+
+if proc = "Safari Technology Preview" then
+    tell front window of application "Safari Technology Preview"
+		set current tab to tab tabIndex
+	end tell
+end if
+
+  return q
+end run
+
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>43F99670-F274-4145-9E5A-4280ACCB45EA</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>Safari Technology.*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>A929FA78-5BAC-410C-8AD1-3C98D06EF222</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string>Workflow fow switching between active windows in the system and Safari/Safari Technology Preview/Chrome tabs
+	<string>Workflow fow switching between active windows in the system and Safari/Chrome tabs
 
 Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudozz! 🔥) [1].
 
@@ -442,6 +517,13 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 			<key>ypos</key>
 			<integer>220</integer>
 		</dict>
+		<key>43F99670-F274-4145-9E5A-4280ACCB45EA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>620</integer>
+			<key>ypos</key>
+			<integer>360</integer>
+		</dict>
 		<key>4B55AF9F-D256-4871-B524-9938AD009D7E</key>
 		<dict>
 			<key>xpos</key>
@@ -457,6 +539,13 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 			<integer>630</integer>
 			<key>ypos</key>
 			<integer>50</integer>
+		</dict>
+		<key>A929FA78-5BAC-410C-8AD1-3C98D06EF222</key>
+		<dict>
+			<key>xpos</key>
+			<integer>530</integer>
+			<key>ypos</key>
+			<integer>390</integer>
 		</dict>
 		<key>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</key>
 		<dict>
