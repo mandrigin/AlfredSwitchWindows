@@ -563,7 +563,7 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.7</string>
+	<string>0.2.8</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>
