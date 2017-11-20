@@ -135,6 +135,16 @@ class BrowserApplication : BrowserEntity {
     
     init(app: SBApplication, processName: String) {
         self.app = app
+        var mc: CUnsignedInt = 0
+        var mlist: UnsafeMutablePointer<Method?> = class_copyMethodList(app.classForCoder, &mc)
+        let olist = mlist
+        print("\(app.debugDescription) \(mc) methods")
+        
+        for i in (0..<mc) {
+            print("Method #\(i): \(method_getName(mlist.pointee))")
+            mlist = mlist.successor()
+        }
+        free(olist)
         self.processName = processName
     }
     
