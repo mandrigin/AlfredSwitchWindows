@@ -190,7 +190,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>matchmode</key>
 				<integer>0</integer>
 				<key>matchstring</key>
-				<string>Google Chrome.*</string>
+				<string>Google Chrome (Canary)?.*</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.filter</string>
