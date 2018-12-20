@@ -56,6 +56,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>0486C218-68A8-4897-8F4E-B51741037678</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>4B55AF9F-D256-4871-B524-9938AD009D7E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -66,7 +76,37 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>0486C218-68A8-4897-8F4E-B51741037678</string>
+				<string>DFDD4CE8-9ED6-40D8-8E11-7B5104273C26</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>BD656024-B882-41AD-9F20-DCE01B327732</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>CBC5D8A8-255D-4E28-BE50-D7B19EE45B5F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A9672888-73C0-4D89-A497-B85E986C1D50</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -103,6 +143,19 @@
 		</array>
 		<key>7686C74A-A33F-49C2-8231-40F1569A481A</key>
 		<array/>
+		<key>A9672888-73C0-4D89-A497-B85E986C1D50</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A5DC0789-027C-4177-BACF-CE2E7C089CA7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</key>
 		<array>
 			<dict>
@@ -116,11 +169,50 @@
 				<false/>
 			</dict>
 		</array>
+		<key>BD656024-B882-41AD-9F20-DCE01B327732</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8F761ADE-CFDB-4C24-A4A5-9065084AC825</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CBC5D8A8-255D-4E28-BE50-D7B19EE45B5F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A9ABD10A-3146-4A01-8965-1EED64F15DD1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DE26058B-66D8-464C-B116-3C36FC69D3FA</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>14FDFA95-B03E-42F9-8F94-0DD482CBCE47</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DFDD4CE8-9ED6-40D8-8E11-7B5104273C26</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5CECCEA1-2E2E-4EE6-A6E7-76A65C2FE3A2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -327,6 +419,49 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+
+set argv to extract_argv(q, "|||||")
+
+set proc to item 1 of argv
+set tabIndex to item 2 of argv as integer
+set windowName to item 3 of argv
+
+try
+	tell application "System Events"
+		with timeout of 0.1 seconds
+			tell process proc to perform action "AXRaise" of window windowName 
+		end timeout
+	end tell
+end try
+
+tell application proc
+    activate
+end tell
+
+if proc = "Safari Technology Preview" then
+    tell front window of application "Safari Technology Preview"
+		set current tab to tab tabIndex
+	end tell
+end if
+
+end alfred_script
+
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+				<key>cachescript</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>F9DFD058-DFE7-4C1C-BC68-1DFAE864F813</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>1</integer>
 				<key>argument</key>
@@ -356,6 +491,25 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 			<string>2A4DC329-9524-4CB9-BB77-7410877C746A</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>Safari Technology Preview\|.*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>0486C218-68A8-4897-8F4E-B51741037678</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -407,6 +561,25 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Safari\|.*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>4B55AF9F-D256-4871-B524-9938AD009D7E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
@@ -450,19 +623,39 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
-				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Safari\|.*</string>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+
+set argv to extract_argv(q, "|||||")
+
+set proc to item 1 of argv
+set tabIndex to item 2 of argv as integer
+set windowName to item 3 of argv
+
+try
+	tell application "System Events"
+		with timeout of 0.1 seconds
+			tell process proc to perform action "AXRaise" of window windowName 
+		end timeout
+	end tell
+end try
+
+tell application proc
+    activate
+end tell
+
+if proc = "Opera" then	tell application "Opera" to set active tab index of front window to tabIndexend if
+
+end alfred_script
+
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+				<key>cachescript</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
+			<string>alfred.workflow.action.applescript</string>
 			<key>uid</key>
-			<string>4B55AF9F-D256-4871-B524-9938AD009D7E</string>
+			<string>5CECCEA1-2E2E-4EE6-A6E7-76A65C2FE3A2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -474,14 +667,33 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>matchcasesensitive</key>
 				<false/>
 				<key>matchmode</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>matchstring</key>
-				<string>Safari Technology Preview\|.*</string>
+				<string>Opera\|.*</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
-			<string>0486C218-68A8-4897-8F4E-B51741037678</string>
+			<string>DFDD4CE8-9ED6-40D8-8E11-7B5104273C26</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Opera Beta\|.*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>BD656024-B882-41AD-9F20-DCE01B327732</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -509,11 +721,7 @@ tell application proc
     activate
 end tell
 
-if proc = "Safari Technology Preview" then
-    tell front window of application "Safari Technology Preview"
-		set current tab to tab tabIndex
-	end tell
-end if
+if proc = "Opera Beta" then	tell application "Opera Beta" to set active tab index of front window to tabIndexend if
 
 end alfred_script
 
@@ -524,13 +732,129 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 			<key>type</key>
 			<string>alfred.workflow.action.applescript</string>
 			<key>uid</key>
-			<string>F9DFD058-DFE7-4C1C-BC68-1DFAE864F813</string>
+			<string>8F761ADE-CFDB-4C24-A4A5-9065084AC825</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+
+set argv to extract_argv(q, "|||||")
+
+set proc to item 1 of argv
+set tabIndex to item 2 of argv as integer
+set windowName to item 3 of argv
+
+try
+	tell application "System Events"
+		with timeout of 0.1 seconds
+			tell process proc to perform action "AXRaise" of window windowName 
+		end timeout
+	end tell
+end try
+
+tell application proc
+    activate
+end tell
+
+if proc = "Opera Developer" then	tell application "Opera Developer" to set active tab index of front window to tabIndexend if
+
+end alfred_script
+
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+				<key>cachescript</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>A9ABD10A-3146-4A01-8965-1EED64F15DD1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Opera Developer\|.*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>CBC5D8A8-255D-4E28-BE50-D7B19EE45B5F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+
+set argv to extract_argv(q, "|||||")
+
+set proc to item 1 of argv
+set tabIndex to item 2 of argv as integer
+set windowName to item 3 of argv
+
+try
+	tell application "System Events"
+		with timeout of 0.1 seconds
+			tell process proc to perform action "AXRaise" of window windowName 
+		end timeout
+	end tell
+end try
+
+tell application proc
+    activate
+end tell
+
+if proc = "Brave Browser" then	tell application "Brave Browser" to set active tab index of front window to tabIndexend if
+
+end alfred_script
+
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+				<key>cachescript</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>A5DC0789-027C-4177-BACF-CE2E7C089CA7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Brave Browser\|.*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>A9672888-73C0-4D89-A497-B85E986C1D50</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Workflow fow switching between active windows in the system and Safari/Chrome tabs
+	<string>Workflow fow switching between active windows in the system and Safari/Opera/Brave/Chrome tabs
 
 Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudozz! 🔥) [1].
 
@@ -542,16 +866,16 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 		<key>0486C218-68A8-4897-8F4E-B51741037678</key>
 		<dict>
 			<key>xpos</key>
-			<integer>470</integer>
+			<integer>490</integer>
 			<key>ypos</key>
-			<integer>460</integer>
+			<integer>350</integer>
 		</dict>
 		<key>0EC23CAD-38F5-4A2D-B28A-A23685F1E575</key>
 		<dict>
 			<key>xpos</key>
-			<integer>540</integer>
+			<integer>450</integer>
 			<key>ypos</key>
-			<integer>180</integer>
+			<integer>170</integer>
 		</dict>
 		<key>14FDFA95-B03E-42F9-8F94-0DD482CBCE47</key>
 		<dict>
@@ -570,34 +894,79 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 		<key>4B55AF9F-D256-4871-B524-9938AD009D7E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>550</integer>
+			<integer>490</integer>
 			<key>ypos</key>
-			<integer>390</integer>
+			<integer>400</integer>
 		</dict>
 		<key>5A3D96FB-36AB-4CAC-A6A5-58E1B4BEA15E</key>
 		<dict>
 			<key>note</key>
-			<string>Hides the other processes.</string>
+			<string>Google Chrome Canary</string>
 			<key>xpos</key>
-			<integer>620</integer>
+			<integer>500</integer>
 			<key>ypos</key>
 			<integer>20</integer>
+		</dict>
+		<key>5CECCEA1-2E2E-4EE6-A6E7-76A65C2FE3A2</key>
+		<dict>
+			<key>note</key>
+			<string>Opera</string>
+			<key>xpos</key>
+			<integer>550</integer>
+			<key>ypos</key>
+			<integer>590</integer>
 		</dict>
 		<key>7686C74A-A33F-49C2-8231-40F1569A481A</key>
 		<dict>
 			<key>note</key>
-			<string>Hides the other processes.</string>
+			<string>Google Chrome</string>
 			<key>xpos</key>
-			<integer>620</integer>
+			<integer>540</integer>
 			<key>ypos</key>
-			<integer>150</integer>
+			<integer>160</integer>
+		</dict>
+		<key>8F761ADE-CFDB-4C24-A4A5-9065084AC825</key>
+		<dict>
+			<key>note</key>
+			<string>Opera Beta</string>
+			<key>xpos</key>
+			<integer>550</integer>
+			<key>ypos</key>
+			<integer>720</integer>
 		</dict>
 		<key>9DC4528B-E0EE-40CE-8594-C3F1F1B512CB</key>
 		<dict>
+			<key>note</key>
+			<string>Safari</string>
 			<key>xpos</key>
-			<integer>630</integer>
+			<integer>570</integer>
 			<key>ypos</key>
-			<integer>350</integer>
+			<integer>450</integer>
+		</dict>
+		<key>A5DC0789-027C-4177-BACF-CE2E7C089CA7</key>
+		<dict>
+			<key>note</key>
+			<string>Brave</string>
+			<key>xpos</key>
+			<integer>550</integer>
+			<key>ypos</key>
+			<integer>1010</integer>
+		</dict>
+		<key>A9672888-73C0-4D89-A497-B85E986C1D50</key>
+		<dict>
+			<key>xpos</key>
+			<integer>450</integer>
+			<key>ypos</key>
+			<integer>1080</integer>
+		</dict>
+		<key>A9ABD10A-3146-4A01-8965-1EED64F15DD1</key>
+		<dict>
+			<key>note</key>
+			<string>Opera Dev</string>
+			<key>xpos</key>
+			<integer>550</integer>
+			<key>ypos</key>
+			<integer>870</integer>
 		</dict>
 		<key>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</key>
 		<dict>
@@ -606,6 +975,20 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 			<key>ypos</key>
 			<integer>350</integer>
 		</dict>
+		<key>BD656024-B882-41AD-9F20-DCE01B327732</key>
+		<dict>
+			<key>xpos</key>
+			<integer>440</integer>
+			<key>ypos</key>
+			<integer>670</integer>
+		</dict>
+		<key>CBC5D8A8-255D-4E28-BE50-D7B19EE45B5F</key>
+		<dict>
+			<key>xpos</key>
+			<integer>440</integer>
+			<key>ypos</key>
+			<integer>910</integer>
+		</dict>
 		<key>DE26058B-66D8-464C-B116-3C36FC69D3FA</key>
 		<dict>
 			<key>xpos</key>
@@ -613,23 +996,32 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 			<key>ypos</key>
 			<integer>210</integer>
 		</dict>
+		<key>DFDD4CE8-9ED6-40D8-8E11-7B5104273C26</key>
+		<dict>
+			<key>xpos</key>
+			<integer>450</integer>
+			<key>ypos</key>
+			<integer>590</integer>
+		</dict>
 		<key>F6142494-8ED8-4369-9BE3-555D11956DD7</key>
 		<dict>
 			<key>xpos</key>
-			<integer>440</integer>
+			<integer>410</integer>
 			<key>ypos</key>
 			<integer>120</integer>
 		</dict>
 		<key>F9DFD058-DFE7-4C1C-BC68-1DFAE864F813</key>
 		<dict>
+			<key>note</key>
+			<string>Safari Tech Preview</string>
 			<key>xpos</key>
-			<integer>640</integer>
+			<integer>570</integer>
 			<key>ypos</key>
-			<integer>490</integer>
+			<integer>320</integer>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.9</string>
+	<string>0.3.0</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>
