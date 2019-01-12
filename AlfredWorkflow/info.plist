@@ -86,6 +86,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>FA71F597-12C1-4357-B3CB-D8A7CDA00BB9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>BD656024-B882-41AD-9F20-DCE01B327732</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -681,6 +691,43 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+
+set argv to extract_argv(q, "|||||")
+
+set proc to item 1 of argv
+set tabIndex to item 2 of argv as integer
+set windowName to item 3 of argv
+
+try
+	tell application "System Events"
+		with timeout of 0.1 seconds
+			tell process proc to perform action "AXRaise" of window windowName 
+		end timeout
+	end tell
+end try
+
+tell application proc
+    activate
+end tell
+
+end alfred_script
+
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+				<key>cachescript</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>FA71F597-12C1-4357-B3CB-D8A7CDA00BB9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>inputstring</key>
 				<string>{query}</string>
 				<key>matchcasesensitive</key>
@@ -880,9 +927,9 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 		<key>14FDFA95-B03E-42F9-8F94-0DD482CBCE47</key>
 		<dict>
 			<key>xpos</key>
-			<integer>420</integer>
+			<integer>390</integer>
 			<key>ypos</key>
-			<integer>300</integer>
+			<integer>280</integer>
 		</dict>
 		<key>2A4DC329-9524-4CB9-BB77-7410877C746A</key>
 		<dict>
@@ -1019,9 +1066,18 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 			<key>ypos</key>
 			<integer>320</integer>
 		</dict>
+		<key>FA71F597-12C1-4357-B3CB-D8A7CDA00BB9</key>
+		<dict>
+			<key>note</key>
+			<string>Other Apps (No Tabs Support)</string>
+			<key>xpos</key>
+			<integer>130</integer>
+			<key>ypos</key>
+			<integer>600</integer>
+		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.3.0</string>
+	<string>0.3.1</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>
