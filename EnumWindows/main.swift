@@ -26,7 +26,7 @@ func search(query: String, onlyTabs: Bool) {
     for browserName in ["Safari", "Safari Technology Preview",
                         "Google Chrome", "Google Chrome Canary",
                         "Opera", "Opera Beta", "Opera Developer",
-                        "Brave Browser"] {
+                        "Brave Browser", "iTerm"] {
         allActiveWindows = searchBrowserTabsIfNeeded(processName: browserName,
                                                      windows: allActiveWindows,
                                                      query: query,

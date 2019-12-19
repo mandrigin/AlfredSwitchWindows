@@ -56,6 +56,16 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
+				<string>C44F13D3-3A11-4292-BD0F-0F36F322D6DE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>0486C218-68A8-4897-8F4E-B51741037678</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -184,6 +194,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>8F761ADE-CFDB-4C24-A4A5-9065084AC825</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C44F13D3-3A11-4292-BD0F-0F36F322D6DE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D6DE9E5D-7883-4216-B28B-1D762E60364A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -381,9 +404,9 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>126</integer>
 				<key>keyword</key>
 				<string>ww</string>
 				<key>queuedelaycustom</key>
@@ -416,7 +439,48 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 			<key>uid</key>
 			<string>DE26058B-66D8-464C-B116-3C36FC69D3FA</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+
+set argv to extract_argv(q, "|||||")set proc to item 1 of argvset tabIndex to item 2 of argv as integerset windowName to item 3 of argvif proc is not "iTerm" then	display alert "This AppleScript works for iTerm only." message "Check the Alfred workflow diagram which triggered this script." as critical buttons {"Cancel"} default button "Cancel" cancel button "Cancel"end iftry	tell application "System Events"		with timeout of 0.1 seconds
+			-- nb. iTerm's process is "iTerm2" even though application name is "iTerm"			tell process "iTerm2" to perform action "AXRaise" of window windowName		end timeout	end tellend trytell application "iTerm"	activateend telltell front window of application "iTerm"	tell tab tabIndex		select	end tellend tell
+
+end alfred_script
+
+on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+				<key>cachescript</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>D6DE9E5D-7883-4216-B28B-1D762E60364A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>iTerm\|.*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>C44F13D3-3A11-4292-BD0F-0F36F322D6DE</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -483,11 +547,11 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>focusedappvariablename</key>
 				<string></string>
 				<key>hotkey</key>
-				<integer>-1</integer>
+				<integer>0</integer>
 				<key>hotmod</key>
-				<integer>262144</integer>
+				<integer>0</integer>
 				<key>hotstring</key>
-				<string>double tap</string>
+				<string></string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -531,9 +595,9 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>escaping</key>
-				<integer>127</integer>
+				<integer>126</integer>
 				<key>keyword</key>
 				<string>w</string>
 				<key>queuedelaycustom</key>
@@ -566,7 +630,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 			<key>uid</key>
 			<string>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -901,7 +965,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Workflow fow switching between active windows in the system and Safari/Opera/Brave/Chrome tabs
+	<string>Workflow fow switching between active windows in the system and Safari/Opera/Brave/Chrome/iTerm tabs
 
 Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudozz! 🔥) [1].
 
@@ -1029,12 +1093,28 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 			<key>ypos</key>
 			<integer>670</integer>
 		</dict>
+		<key>C44F13D3-3A11-4292-BD0F-0F36F322D6DE</key>
+		<dict>
+			<key>xpos</key>
+			<integer>710</integer>
+			<key>ypos</key>
+			<integer>270</integer>
+		</dict>
 		<key>CBC5D8A8-255D-4E28-BE50-D7B19EE45B5F</key>
 		<dict>
 			<key>xpos</key>
 			<integer>440</integer>
 			<key>ypos</key>
 			<integer>910</integer>
+		</dict>
+		<key>D6DE9E5D-7883-4216-B28B-1D762E60364A</key>
+		<dict>
+			<key>note</key>
+			<string>iTerm</string>
+			<key>xpos</key>
+			<integer>785</integer>
+			<key>ypos</key>
+			<integer>240</integer>
 		</dict>
 		<key>DE26058B-66D8-464C-B116-3C36FC69D3FA</key>
 		<dict>
@@ -1071,11 +1151,13 @@ To make this workflow work, don't forget to allow Alfred to control your apps (S
 			<key>note</key>
 			<string>Other Apps (No Tabs Support)</string>
 			<key>xpos</key>
-			<integer>130</integer>
+			<integer>230</integer>
 			<key>ypos</key>
-			<integer>600</integer>
+			<integer>610</integer>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>0.3.1</string>
 	<key>webaddress</key>

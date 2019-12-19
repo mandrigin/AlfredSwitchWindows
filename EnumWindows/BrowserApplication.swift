@@ -31,16 +31,6 @@ extension BrowserEntity {
     }
 }
 
-extension BrowserNamedEntity {
-    var title : String {
-        /* Safari uses 'name' as the tab title, while most of the browsers have 'title' there */
-        if self.rawItem.responds(to: #selector(getter: MTLFunction.name)) {
-            return performSelectorByName(name: "name", defaultValue: "")
-        }
-        return performSelectorByName(name: "title", defaultValue: "")
-    }
-}
-
 class BrowserTab : BrowserNamedEntity, Searchable, ProcessNameProtocol {
     private let tabRaw : AnyObject
     private let index : Int?
@@ -61,6 +51,14 @@ class BrowserTab : BrowserNamedEntity, Searchable, ProcessNameProtocol {
         
     var url : String {
         return performSelectorByName(name: "URL", defaultValue: "")
+    }
+
+    var title : String {
+        /* Safari uses 'name' as the tab title, while most of the browsers have 'title' there */
+        if self.rawItem.responds(to: Selector("name")) {
+            return performSelectorByName(name: "name", defaultValue: "")
+        }
+        return performSelectorByName(name: "title", defaultValue: "")
     }
     
     var tabIndex : Int {
@@ -84,6 +82,25 @@ class BrowserTab : BrowserNamedEntity, Searchable, ProcessNameProtocol {
  */
 }
 
+class iTermTab : BrowserTab {
+    override var title : String {
+        guard self.rawItem.responds(to: Selector("currentSession")),
+            let session: AnyObject = performSelectorByName(name: "currentSession", defaultValue: nil),
+            session.responds(to: Selector("name"))
+        else {
+            return self.windowTitle
+        }
+
+        let selectorResult = session.perform(Selector("name"))
+        guard let retainedValue = selectorResult?.takeRetainedValue(),
+            let tabName = retainedValue as? String
+        else {
+            return self.windowTitle
+        }
+        return tabName
+    }
+}
+
 class BrowserWindow : BrowserNamedEntity {
     private let windowRaw : AnyObject
     
@@ -102,8 +119,19 @@ class BrowserWindow : BrowserNamedEntity {
         let result = performSelectorByName(name: "tabs", defaultValue: [AnyObject]())
         
         return result.enumerated().map { (index, element) in
+            if processName == "iTerm" {
+                return iTermTab(raw: element, index: index + 1, windowTitle: self.title, processName: self.processName)
+            }
             return BrowserTab(raw: element, index: index + 1, windowTitle: self.title, processName: self.processName)
         }
+    }
+
+    var title : String {
+        /* Safari uses 'name' as the tab title, while most of the browsers have 'title' there */
+        if self.rawItem.responds(to: Selector("name")) {
+            return performSelectorByName(name: "name", defaultValue: "")
+        }
+        return performSelectorByName(name: "title", defaultValue: "")
     }
 }
 
