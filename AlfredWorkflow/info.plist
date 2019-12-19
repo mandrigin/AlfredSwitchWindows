@@ -418,7 +418,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Digging into safari tabs</string>
+				<string>Searching...</string>
 				<key>script</key>
 				<string>./EnumWindows --search-tabs="{query}"</string>
 				<key>scriptargtype</key>
@@ -426,9 +426,9 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>scriptfile</key>
 				<string>~/Desktop/EnumWindows/EnumWindows/EnumWindows</string>
 				<key>subtext</key>
-				<string>Enter the title of Safari tab</string>
+				<string>Enter part of the tab title</string>
 				<key>title</key>
-				<string>Search Safari tabs</string>
+				<string>Search between tabs</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -617,7 +617,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Write the title or the tab name</string>
+				<string>Enter part of the title or the tab name</string>
 				<key>title</key>
 				<string>Switch between windows and tabs</string>
 				<key>type</key>
