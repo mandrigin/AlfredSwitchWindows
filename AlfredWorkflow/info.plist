@@ -965,11 +965,11 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Workflow fow switching between active windows in the system and Safari/Opera/Brave/Chrome/iTerm tabs
+	<string>Workflow for switching between active windows in the system and Safari/Opera/Brave/Chrome/iTerm tabs.
+
+❗To make this workflow work, don't forget to allow Alfred to control your apps (Security &amp; Privacy → Accessibility).
 
 Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudozz! 🔥) [1].
-
-To make this workflow work, don't forget to allow Alfred to control your apps (Security &amp; Privacy → Accessibility)
 
 [1]: https://www.alfredforum.com/topic/9326-a-simple-windows-switcher/</string>
 	<key>uidata</key>
