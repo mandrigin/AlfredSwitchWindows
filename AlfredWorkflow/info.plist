@@ -263,23 +263,10 @@
 
 set argv to extract_argv(q, "|||||")
 
-set proc to item 1 of argv
-set tabIndex to item 2 of argv as integer
-set windowName to item 3 of argv
+set proc to item 1 of argvset tabIndex to item 2 of argv as integerset windowName to item 3 of argv
 
-try
-	tell application "System Events"
-		with timeout of 0.1 seconds
-			tell process proc to perform action "AXRaise" of window windowName 
-		end timeout
-	end tell
-end try
-
-tell application proc
-    activate
-end tell
-if proc = "Google Chrome Canary" then	tell application "Google Chrome Canary"
-		set active tab index of front window to tabIndex	end tellend if
+if proc is not "Google Chrome Canary" then	display alert "This AppleScript works for Google Chrome Canary only." message "Check the Alfred workflow diagram which triggered this script." as critical buttons {"Cancel"} default button "Cancel" cancel button "Cancel"end if
+tell application "Google Chrome Canary"	activate	set win_List to every window	repeat with win in win_List		if title of win = windowName then			set index of win to 1			set active tab index of win to tabIndex		end if	end repeatend tell
 
 end alfred_script
 
@@ -325,19 +312,8 @@ set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
-try
-	tell application "System Events"
-		with timeout of 0.1 seconds
-			tell process proc to perform action "AXRaise" of window windowName 
-		end timeout
-	end tell
-end try
-
-tell application proc
-    activate
-end tell
-
-if proc = "Google Chrome" then	tell application "Google Chrome" to set active tab index of front window to tabIndexend if
+if proc is not "Google Chrome" then	display alert "This AppleScript works for Google Chrome only." message "Check the Alfred workflow diagram which triggered this script." as critical buttons {"Cancel"} default button "Cancel" cancel button "Cancel"end if
+tell application "Google Chrome"	activate	set win_List to every window	repeat with win in win_List		if title of win = windowName then			set index of win to 1			set active tab index of win to tabIndex		end if	end repeatend tell
 
 end alfred_script
 
