@@ -13,7 +13,12 @@ protocol BrowserNamedEntity : BrowserEntity {
 extension BrowserEntity {
     func performSelectorByName<T>(name : String, defaultValue : T) -> T {
         let sel = Selector(name)
+        guard self.rawItem.responds(to: sel) else {
+            return defaultValue
+        }
+
         let selectorResult = self.rawItem.perform(sel)
+
         guard let retainedValue = selectorResult?.takeRetainedValue() else {
             return defaultValue
         }
