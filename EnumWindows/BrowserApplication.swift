@@ -108,7 +108,7 @@ class BrowserApplication : BrowserEntity {
     
     static func connect(processName: String) -> BrowserApplication? {
 
-        let ws = NSWorkspace.shared()
+        let ws = NSWorkspace.shared
 
         guard let fullPath = ws.fullPath(forApplication: processName) else {
             return nil

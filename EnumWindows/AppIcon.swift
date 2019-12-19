@@ -22,7 +22,7 @@ struct AppIcon {
     }
     
     private var pathInternal : String? {
-        let appPath = self.appName | { NSWorkspace.shared().fullPath(forApplication: $0) }
+        let appPath = self.appName | { NSWorkspace.shared.fullPath(forApplication: $0) }
         
         guard var iconFileName = appPath | { Bundle(path: $0) } | { $0.infoDictionary?["CFBundleIconFile"] } | { $0 as? String } else {
             return nil
