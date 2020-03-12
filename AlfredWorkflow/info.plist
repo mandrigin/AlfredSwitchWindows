@@ -286,16 +286,36 @@
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")
+set argv to extract_argv(q, &quot;|||||&quot;)
 
-set proc to item 1 of argvset tabIndex to item 2 of argv as integerset windowName to item 3 of argv
+set proc to item 1 of argv
+set tabIndex to item 2 of argv as integer
+set windowName to item 3 of argv
 
-if proc is not "Google Chrome Canary" then	display alert "This AppleScript works for Google Chrome Canary only." message "Check the Alfred workflow diagram which triggered this script." as critical buttons {"Cancel"} default button "Cancel" cancel button "Cancel"end if
-tell application "Google Chrome Canary"	activate	set win_List to every window	repeat with win in win_List		if title of win = windowName then			set index of win to 1			set active tab index of win to tabIndex		end if	end repeatend tell
+if proc is not &quot;Google Chrome Canary&quot; then
+	display alert &quot;This AppleScript works for Google Chrome Canary only.&quot; message &quot;Check the Alfred workflow diagram which triggered this script.&quot; as critical buttons {&quot;Cancel&quot;} default button &quot;Cancel&quot; cancel button &quot;Cancel&quot;
+end if
+
+tell application &quot;Google Chrome Canary&quot;
+	activate
+	set win_List to every window
+	repeat with win in win_List
+		if title of win = windowName then
+			set index of win to 1
+			set active tab index of win to tabIndex
+		end if
+	end repeat
+end tell
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -331,18 +351,36 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")
+set argv to extract_argv(q, &quot;|||||&quot;)
 
 set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
-if proc is not "Google Chrome" then	display alert "This AppleScript works for Google Chrome only." message "Check the Alfred workflow diagram which triggered this script." as critical buttons {"Cancel"} default button "Cancel" cancel button "Cancel"end if
-tell application "Google Chrome"	activate	set win_List to every window	repeat with win in win_List		if title of win = windowName then			set index of win to 1			set active tab index of win to tabIndex		end if	end repeatend tell
+if proc is not &quot;Google Chrome&quot; then
+	display alert &quot;This AppleScript works for Google Chrome only.&quot; message &quot;Check the Alfred workflow diagram which triggered this script.&quot; as critical buttons {&quot;Cancel&quot;} default button &quot;Cancel&quot; cancel button &quot;Cancel&quot;
+end if
+
+tell application &quot;Google Chrome&quot;
+	activate
+	set win_List to every window
+	repeat with win in win_List
+		if title of win = windowName then
+			set index of win to 1
+			set active tab index of win to tabIndex
+		end if
+	end repeat
+end tell
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -398,7 +436,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./EnumWindows --search-tabs="{query}"</string>
+				<string>./EnumWindows --search-tabs=&quot;{query}&quot;</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -425,12 +463,45 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")set proc to item 1 of argvset tabIndex to item 2 of argv as integerset windowName to item 3 of argvif proc is not "iTerm" then	display alert "This AppleScript works for iTerm only." message "Check the Alfred workflow diagram which triggered this script." as critical buttons {"Cancel"} default button "Cancel" cancel button "Cancel"end iftry	tell application "System Events"		with timeout of 0.1 seconds
-			-- nb. iTerm's process is "iTerm2" even though application name is "iTerm"			tell process "iTerm2" to perform action "AXRaise" of window windowName		end timeout	end tellend trytell application "iTerm"	activateend telltell front window of application "iTerm"	tell tab tabIndex		select	end tellend tell
+set argv to extract_argv(q, &quot;|||||&quot;)
+
+set proc to item 1 of argv
+set tabIndex to item 2 of argv as integer
+set windowName to item 3 of argv
+
+if proc is not &quot;iTerm&quot; then
+	display alert &quot;This AppleScript works for iTerm only.&quot; message &quot;Check the Alfred workflow diagram which triggered this script.&quot; as critical buttons {&quot;Cancel&quot;} default button &quot;Cancel&quot; cancel button &quot;Cancel&quot;
+end if
+
+try
+	tell application &quot;System Events&quot;
+		with timeout of 0.1 seconds
+			-- nb. iTerm&apos;s process is &quot;iTerm2&quot; even though application name is &quot;iTerm&quot;
+			tell process &quot;iTerm2&quot; to perform action &quot;AXRaise&quot; of window windowName
+		end timeout
+	end tell
+end try
+
+tell application &quot;iTerm&quot;
+	activate
+end tell
+
+
+tell front window of application &quot;iTerm&quot;
+	tell tab tabIndex
+		select
+	end tell
+end tell
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -474,16 +545,16 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")
+set argv to extract_argv(q, &quot;|||||&quot;)
 
 set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
 try
-	tell application "System Events"
+	tell application &quot;System Events&quot;
 		with timeout of 0.1 seconds
-			tell process proc to perform action "AXRaise" of window windowName 
+			tell process proc to perform action &quot;AXRaise&quot; of window windowName 
 		end timeout
 	end tell
 end try
@@ -492,15 +563,21 @@ tell application proc
     activate
 end tell
 
-if proc = "Safari Technology Preview" then
-    tell front window of application "Safari Technology Preview"
+if proc = &quot;Safari Technology Preview&quot; then
+    tell front window of application &quot;Safari Technology Preview&quot;
 		set current tab to tab tabIndex
 	end tell
 end if
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -589,7 +666,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./EnumWindows --search="{query}"</string>
+				<string>./EnumWindows --search=&quot;{query}&quot;</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -635,16 +712,16 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")
+set argv to extract_argv(q, &quot;|||||&quot;)
 
 set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
 try
-	tell application "System Events"
+	tell application &quot;System Events&quot;
 		with timeout of 0.1 seconds
-			tell process proc to perform action "AXRaise" of window windowName 
+			tell process proc to perform action &quot;AXRaise&quot; of window windowName 
 		end timeout
 	end tell
 end try
@@ -653,15 +730,21 @@ tell application proc
     activate
 end tell
 
-if proc = "Safari" then
-    tell front window of application "Safari"
+if proc = &quot;Safari&quot; then
+    tell front window of application &quot;Safari&quot;
 		set current tab to tab tabIndex
 	end tell
 end if
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -678,16 +761,16 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")
+set argv to extract_argv(q, &quot;|||||&quot;)
 
 set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
 try
-	tell application "System Events"
+	tell application &quot;System Events&quot;
 		with timeout of 0.1 seconds
-			tell process proc to perform action "AXRaise" of window windowName 
+			tell process proc to perform action &quot;AXRaise&quot; of window windowName 
 		end timeout
 	end tell
 end try
@@ -696,11 +779,19 @@ tell application proc
     activate
 end tell
 
-if proc = "Opera" then	tell application "Opera" to set active tab index of front window to tabIndexend if
+if proc = &quot;Opera&quot; then
+	tell application &quot;Opera&quot; to set active tab index of front window to tabIndex
+end if
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -736,16 +827,16 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")
+set argv to extract_argv(q, &quot;|||||&quot;)
 
 set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
 try
-	tell application "System Events"
+	tell application &quot;System Events&quot;
 		with timeout of 0.1 seconds
-			tell process proc to perform action "AXRaise" of window windowName 
+			tell process proc to perform action &quot;AXRaise&quot; of window windowName 
 		end timeout
 	end tell
 end try
@@ -756,7 +847,13 @@ end tell
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -792,16 +889,16 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")
+set argv to extract_argv(q, &quot;|||||&quot;)
 
 set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
 try
-	tell application "System Events"
+	tell application &quot;System Events&quot;
 		with timeout of 0.1 seconds
-			tell process proc to perform action "AXRaise" of window windowName 
+			tell process proc to perform action &quot;AXRaise&quot; of window windowName 
 		end timeout
 	end tell
 end try
@@ -810,11 +907,19 @@ tell application proc
     activate
 end tell
 
-if proc = "Opera Beta" then	tell application "Opera Beta" to set active tab index of front window to tabIndexend if
+if proc = &quot;Opera Beta&quot; then
+	tell application &quot;Opera Beta&quot; to set active tab index of front window to tabIndex
+end if
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -831,16 +936,16 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")
+set argv to extract_argv(q, &quot;|||||&quot;)
 
 set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
 try
-	tell application "System Events"
+	tell application &quot;System Events&quot;
 		with timeout of 0.1 seconds
-			tell process proc to perform action "AXRaise" of window windowName 
+			tell process proc to perform action &quot;AXRaise&quot; of window windowName 
 		end timeout
 	end tell
 end try
@@ -849,11 +954,19 @@ tell application proc
     activate
 end tell
 
-if proc = "Opera Developer" then	tell application "Opera Developer" to set active tab index of front window to tabIndexend if
+if proc = &quot;Opera Developer&quot; then
+	tell application &quot;Opera Developer&quot; to set active tab index of front window to tabIndex
+end if
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -889,16 +1002,16 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<key>applescript</key>
 				<string>on alfred_script(q)
 
-set argv to extract_argv(q, "|||||")
+set argv to extract_argv(q, &quot;|||||&quot;)
 
 set proc to item 1 of argv
 set tabIndex to item 2 of argv as integer
 set windowName to item 3 of argv
 
 try
-	tell application "System Events"
+	tell application &quot;System Events&quot;
 		with timeout of 0.1 seconds
-			tell process proc to perform action "AXRaise" of window windowName 
+			tell process proc to perform action &quot;AXRaise&quot; of window windowName 
 		end timeout
 	end tell
 end try
@@ -907,11 +1020,19 @@ tell application proc
     activate
 end tell
 
-if proc = "Brave Browser" then	tell application "Brave Browser" to set active tab index of front window to tabIndexend if
+if proc = &quot;Brave Browser&quot; then
+	tell application &quot;Brave Browser&quot; to set active tab index of front window to tabIndex
+end if
 
 end alfred_script
 
-on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text item delimiters	set AppleScript's text item delimiters to new_delimiter	set argv to every text item of source_string	set AppleScript's text item delimiters to backup	return argvend extract_argv</string>
+on extract_argv(source_string, new_delimiter)
+	set backup to AppleScript&apos;s text item delimiters
+	set AppleScript&apos;s text item delimiters to new_delimiter
+	set argv to every text item of source_string
+	set AppleScript&apos;s text item delimiters to backup
+	return argv
+end extract_argv</string>
 				<key>cachescript</key>
 				<true/>
 			</dict>
@@ -945,9 +1066,9 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 	<key>readme</key>
 	<string>Workflow for switching between active windows in the system and Safari/Opera/Brave/Chrome/iTerm tabs.
 
-❗To make this workflow work, don't forget to allow Alfred to control your apps (Security &amp; Privacy → Accessibility).
+❗To make this workflow work, don&apos;t forget to allow Alfred to control your apps (Security &amp; Privacy → Accessibility).
 
-Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudozz! 🔥) [1].
+Inspration is taken from &quot;Windows Switcher&quot; workflow from Emanuele Munafò (kudozz! 🔥) [1].
 
 [1]: https://www.alfredforum.com/topic/9326-a-simple-windows-switcher/</string>
 	<key>uidata</key>
@@ -1135,7 +1256,7 @@ Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudo
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.3.3</string>
+	<string>0.3.4</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>

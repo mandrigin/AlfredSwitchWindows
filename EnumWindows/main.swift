@@ -42,6 +42,25 @@ func search(query: String, onlyTabs: Bool) {
     print(AlfredDocument(withItems: alfredItems).xml.xmlString)
 }
 
+func handleCatalinaScreenRecordingPermission() {
+    guard let firstWindow = Windows.any else {
+        return
+    }
+
+    guard !firstWindow.hasName else {
+        return
+    }
+
+    let windowImage = CGWindowListCreateImage(.null, .optionIncludingWindow,
+                                              firstWindow.number,
+                                              [.boundsIgnoreFraming, .bestResolution])
+    if windowImage == nil {
+        debugPrint("Before using this app, you need to give permission in System Preferences > Security & Privacy > Privacy > Screen Recording.\nPlease authorize and re-launch.")
+        exit(1)
+    }
+}
+
+handleCatalinaScreenRecordingPermission()
 
 for command in CommandLine.commands() {
     switch command {

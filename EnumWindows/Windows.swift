@@ -8,13 +8,19 @@ class WindowInfoDict : Searchable, ProcessNameProtocol {
     }
     
     var name : String {
-	//ISSUE #25: kCGWindowName seems to be deprecated in Catalina 10.15.3
-	//  Returning kCGWindowOwnerName as the AppName as a workaround
-        return self.dictItem(key: "kCGWindowOwnerName", defaultValue: "")
+        return self.dictItem(key: "kCGWindowName", defaultValue: "")
+    }
+
+    var hasName : Bool {
+        return self.windowInfoDict["kCGWindowName" as NSObject] != nil
     }
     
     var windowTitle: String {
         return self.name
+    }
+
+    var number: UInt32 {
+        return self.dictItem(key: "kCGWindowNumber", defaultValue: 0)
     }
     
     var processName : String {
@@ -76,6 +82,23 @@ class WindowInfoDict : Searchable, ProcessNameProtocol {
 }
 
 struct Windows {
+    static var any : WindowInfoDict? {
+        get {
+            guard let wl = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) else {
+                return nil
+            }
+
+            return (0..<CFArrayGetCount(wl)).flatMap { (i : Int) -> [WindowInfoDict] in
+                guard let windowInfoRef = CFArrayGetValueAtIndex(wl, i) else {
+                    return []
+                }
+
+                let wi = WindowInfoDict(rawDict: windowInfoRef)
+                return [wi]
+            }.first
+        }
+    }
+
     static var all : [WindowInfoDict] {
         get {
             guard let wl = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) else {
