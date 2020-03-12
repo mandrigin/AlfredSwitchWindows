@@ -379,14 +379,12 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>escaping</key>
-				<integer>126</integer>
+				<integer>68</integer>
 				<key>keyword</key>
 				<string>ww</string>
 				<key>queuedelaycustom</key>
@@ -419,7 +417,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 			<key>uid</key>
 			<string>DE26058B-66D8-464C-B116-3C36FC69D3FA</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -572,8 +570,6 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -612,7 +608,7 @@ on extract_argv(source_string, new_delimiter)	set backup to AppleScript's text 
 			<key>uid</key>
 			<string>BBE27144-1C88-4DB4-BCF3-B4E7CCE3A14B</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1138,10 +1134,8 @@ Inspration is taken from "Windows Switcher" workflow from Emanuele Munafò (kudo
 			<integer>610</integer>
 		</dict>
 	</dict>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
-	<string>0.3.1</string>
+	<string>0.3.3</string>
 	<key>webaddress</key>
 	<string>mandrigin.ru</string>
 </dict>
