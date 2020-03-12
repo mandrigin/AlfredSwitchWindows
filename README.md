@@ -4,7 +4,7 @@
 
 Make sure that Alfred is added to "Security & Privacy -> Screen Recording"
 
-[](/catalina.png)
+![](/catalina.png)
 
 ## * * *
 
