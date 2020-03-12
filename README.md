@@ -1,5 +1,13 @@
 # Swift Windows Switcher
 
+## Catalina Users
+
+Make sure that Alfred is added to "Security & Privacy -> Screen Recording"
+
+[](/catalina.png)
+
+## * * *
+
 My little "weekend" project.
 Alfred workflow to switch between open windows in the system and Safari tabs.
 
