@@ -8,7 +8,9 @@ class WindowInfoDict : Searchable, ProcessNameProtocol {
     }
     
     var name : String {
-        return self.dictItem(key: "kCGWindowName", defaultValue: "")
+	//ISSUE #25: kCGWindowName seems to be deprecated in Catalina 10.15.3
+	//  Returning kCGWindowOwnerName as the AppName as a workaround
+        return self.dictItem(key: "kCGWindowOwnerName", defaultValue: "")
     }
     
     var windowTitle: String {
