@@ -2,7 +2,8 @@
 
 ## Catalina Users
 
-Make sure that Alfred is added to "Security & Privacy -> Screen Recording"
+Make sure that Alfred is added to "Security & Privacy -> Screen Recording".
+The context on why that is needed is [here](https://github.com/mandrigin/AlfredSwitchWindows/issues/31).
 
 ![](/catalina.png)
 
