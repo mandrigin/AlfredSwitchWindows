@@ -54,6 +54,10 @@ class BrowserTab : BrowserNamedEntity, Searchable, ProcessNameProtocol {
     }
 
     var title : String {
+        return self.titleInternal.count > 0 ? self.titleInternal : self.url
+    }
+
+    var titleInternal : String {
         /* Safari uses 'name' as the tab title, while most of the browsers have 'title' there */
         if self.rawItem.responds(to: Selector("name")) {
             return performSelectorByName(name: "name", defaultValue: "")
@@ -69,7 +73,7 @@ class BrowserTab : BrowserNamedEntity, Searchable, ProcessNameProtocol {
     }
     
     var searchStrings : [String] {
-        return ["Browser", self.url, self.title]
+        return ["Browser", self.url, self.title, self.processName]
     }
     
     /*
