@@ -62,6 +62,21 @@ func handleCatalinaScreenRecordingPermission() {
 
 handleCatalinaScreenRecordingPermission()
 
+/*
+ a naive perf test, decided to keep it here for convenience
+
+let start = DispatchTime.now() // <<<<<<<<<< Start time
+
+for _ in 0...100 {
+    search(query: "pull", onlyTabs: false)
+}
+let end = DispatchTime.now()   // <<<<<<<<<<   end time
+let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // <<<<< Difference in nano seconds (UInt64)
+let timeInterval = Double(nanoTime) / 1_000_000_000 // Technically could overflow for long running tests
+
+print("TIME SPENT: \(timeInterval)")
+*/
+
 for command in CommandLine.commands() {
     switch command {
     case let searchCommand as SearchCommand:
