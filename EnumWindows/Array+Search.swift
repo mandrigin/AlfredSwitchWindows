@@ -6,14 +6,14 @@ protocol Searchable {
 
 extension Array where Element:Searchable {
     func search(query: String) -> [Element] {
-        guard query.characters.count > 0 else {
+        guard !query.isEmpty else {
             return self
         }
         let components : ArraySlice<String> =
             ArraySlice(
                 query.components(separatedBy:  " ")
                     .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                    .filter { $0.characters.count > 0 }
+                    .filter { !$0.isEmpty }
             )
         return search(components: components)
     }

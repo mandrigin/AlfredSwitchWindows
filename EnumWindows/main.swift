@@ -77,6 +77,14 @@ let timeInterval = Double(nanoTime) / 1_000_000_000 // Technically could overflo
 print("TIME SPENT: \(timeInterval)")
 */
 
+if(CommandLine.commands().isEmpty) {
+    print("Unknown command!")
+    print("Commands:")
+    print("--search=<query> to search for active windows/Safari tabs.")
+    print("--search-tabs=<query> to search for active browser tabs.")
+    exit(1)
+}
+
 for command in CommandLine.commands() {
     switch command {
     case let searchCommand as SearchCommand:
@@ -89,7 +97,8 @@ for command in CommandLine.commands() {
         print("Unknown command!")
         print("Commands:")
         print("--search=<query> to search for active windows/Safari tabs.")
+        print("--search-tabs=<query> to search for active browser tabs.")
         exit(1)
     }
+    
 }
-

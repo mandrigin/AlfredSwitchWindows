@@ -113,7 +113,7 @@ struct Windows {
                 let wi = WindowInfoDict(rawDict: windowInfoRef)
                 
                 // We don't want to clutter our output with unnecessary windows that we can't switch to anyway.
-                guard wi.name.characters.count > 0 && !wi.isProbablyMenubarItem && wi.isVisible else {
+                guard !wi.name.isEmpty && !wi.isProbablyMenubarItem && wi.isVisible else {
                     return []
                 }
                 
